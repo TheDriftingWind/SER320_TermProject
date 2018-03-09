@@ -10,6 +10,6 @@ var professorSchema = new Schema({
     timestamps: true
 });
 
-var professor = mongoose.model('professor', professorSchema);
+var Professors = mongoose.model('professor', professorSchema);
 
-module.exports = professor;
+module.exports = Professors;

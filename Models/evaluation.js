@@ -28,6 +28,6 @@ var evaluationSchema = new Schema({
     timestamps: true
 });
 
-var evaluation = mongoose.model('evaluation', evaluationSchema);
+var Evaluations = mongoose.model('evaluation', evaluationSchema);
 
-module.exports = evaluation;
+module.exports = Evaluations;

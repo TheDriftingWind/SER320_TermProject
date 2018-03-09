@@ -11,6 +11,6 @@ var projectSchema = new Schema({
     timestamps: true
 });
 
-var project = mongoose.model('project', projectSchema);
+var Projects = mongoose.model('project', projectSchema);
 
-module.exports = project;
+module.exports = Projects;

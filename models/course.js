@@ -12,6 +12,6 @@ var courseSchema = new Schema({
     timestamps: true
 });
 
-var course = mongoose.model('course', courseSchema);
+var Courses = mongoose.model('course', courseSchema);
 
-module.exports = course;
+module.exports = Courses;
