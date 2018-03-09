@@ -6,7 +6,7 @@ var studentSchema = new Schema({
     last_name: { type: String },
     email: { type: String },
     password: { type: String },
-    teamId: [{ type: Number }] //students need to be able to add courses to their profile
+    teamId: { type: Number }
   }, {
     timestamps: true
 });
