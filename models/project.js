@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var projectSchema = new Schema({
     name: { type: String },
     description: {type: String },
-    evaluations : [{type: Schema.Types.ObjetId, ref: 'evaluation'}],
+    evaluations : [{type: Schema.Types.ObjectId, ref: 'evaluation'}],
     startDate: {type: Date},
     endDate: {type: Date}
   }, {
