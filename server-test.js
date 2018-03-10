@@ -1,3 +1,7 @@
+/*
+ * Run mongodb server
+ * Tests will be logged, view in commond line
+ */
 var mongoose = require('mongoose'),
  assert = require('assert');
 
@@ -16,7 +20,6 @@ var url = 'mongodb://localhost:27017/SER';
 // Connect using mongoose
 mongoose.connect(url);
 
-//open a connection and get a db handler
 var db = mongoose.connection;
 
 //error handling
@@ -30,7 +33,9 @@ db.once('open', function () {
     var student_id2;
     var course_id;
     var project_id;
+    var evaluation_id;
 
+    /*     Create Tests startDate     */
     // create a new student
     Students.create({
         first_name : 'Joe',
@@ -70,8 +75,6 @@ db.once('open', function () {
       }
     )
 
-
-
     Courses.create({
       name: 'Software Arch',
       course_number: 'SER320',
@@ -97,21 +100,9 @@ db.once('open', function () {
         if(err) throw err
         console.log('project created: ' + project)
 
-        Courses.findByIdAndUpdate(
-          mongoose.Types.ObjectId(course_id),
-          {$set:{projects: [mongoose.Types.ObjectId(project_id)]}},
-          function(err, course){
-            if (err) throw err;
-            console.log("Update Course: " + course);
-          }
-        );
-
         project_id = project._id
       }
     )
-
-
-
 
     Evaluations.create({
       evaluator: mongoose.Types.ObjectId(student_id),
@@ -123,21 +114,62 @@ db.once('open', function () {
     }, function(err, evaluation){
         if(err) throw err
         console.log('evaluation created: ' + evaluation)
-        var evaluation_id = evaluation._id
+        evaluation_id = evaluation._id
 
-        Projects.findByIdAndUpdate(
-          mongoose.Types.ObjectId(project_id),
-          {$set:{evaluations: [mongoose.Types.ObjectId(evaluation_id)]}},
-          function(err, course){
-            if (err) throw err;
-            console.log("Update Course: " + course);
-          }
-        );
+
       }
     )
+    /*       Create Test END           */
+    /*       Update Test Start          */
+    Courses.findByIdAndUpdate(
+      course_id,
+      {$set:{projects: [mongoose.Types.ObjectId(project_id)]}},
+      function(err, course){
+        if (err) throw err;
+        console.log("Update Course: " + course);
+      }
+    );
 
-
-
+    Projects.findByIdAndUpdate(
+    project_id,
+      {$set:{evaluations: [mongoose.Types.ObjectId(evaluation_id)]}},
+      function(err, course){
+        if (err) throw err;
+        console.log("Update Course: " + course);
+      }
+    );
+    /*       Delete Test Start        */
+    Courses.findByIdAndRemove(
+      student_id2,
+      function(err, result){
+        if(err) throw err
+        console.log('Student ' + student_id2 + ' deleted')
+      }
+    )
+    Evaluations.findByIdAndRemove(
+      evaluation_id,
+      function(err, result){
+        if(err) throw err
+        console.log('Evaluation ' + evaluation_id + ' deleted')
+      }
+    )
+    /*       Delete Test END        */
+    /*      Read Test Start       */
+    Students.find(function(err, students){
+      console.log(students);
+    });
+    Professors.find(function(err, professors){
+      console.log(professors);
+    });
+    Courses.find(function(err, courses){
+      console.log(courses);
+    })
+    Projects.find(function(err, projects){
+      console.log(projects);
+    })
+    Evaluations.find(function(err, evaluations){
+      console.log(evaluations);
+    })
 
 });
 
