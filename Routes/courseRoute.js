@@ -17,7 +17,7 @@ router.route('/')
     courses.create(req.body, function(err, course){
         if(err)
             throw err;
-        
+
         res.writeHead(200, {'Content/Type': 'text-plain'});
         res.end('Course '+course._id+' has been created');
         })
@@ -28,8 +28,8 @@ router.route('/:courseId')
     courses.findById(req.params.courseId, function(err, course){
         if(err)
             throw err;
-        
-        res.json(course); 
+
+        res.json(course);
     });
   })
   .delete(function(req, res, next){
@@ -61,7 +61,7 @@ router.route('/:courseId/students/:studentId')
      courses.findById(req.params.courseId, function(err, course){
         if(err)
             throw err;
-        
+
     course.students.findById(req.params.studentId, function(err, student){
         if(err) throw err;
         res.json(student);
@@ -72,7 +72,7 @@ router.route('/:courseId/students/:studentId')
      courses.findById(req.params.courseId, function(err, course){
         if(err)
             throw err;
-        
+
     course.students.findByIdAndRemove(req.params.studentId, function(err, resp){
         if(err) throw err;
         res.json(resp);
@@ -99,10 +99,10 @@ router.route('/:courseId/project')
         if(err) throw err;
         // Add the new projectId
         course.projects.push(id);
-        course.save(function(err, recipe){
+        course.save(function(err, res){
           if(err) throw err;
           res.writeHead(200, {'Content-Type':'text-plain'});
-          res.json(project);
+          res.json(id);
           res.end('Added project - id:' + id + " to course - id:" + req.params.courseId);
         });
       }
@@ -125,7 +125,7 @@ router.route('/:courseId/project/:projectId')
     },{
       new: true
     }, function(err, project){
-      if(err) throw err;
+        if(err) throw err;
         res.json(project)
     });
   })
@@ -138,23 +138,53 @@ router.route('/:courseId/project/:projectId')
 
 router.route('/:courseId/project/:projectId/evaluations')
   .get(function(req, res, next){
-
+    evaluations.find({}, function(err, evaluations){
+      if(err) throw err;
+      res.json(evaluations);
+    });
   })
   .post(function(req, res, next){
+    evaluations.create(req.body, function(err, evaluation){
+      if(err) throw err;
 
+      var id = evaluation._id;
+      projects.findById(req.params.projectId, function(err, project){
+        if(err) throw err;
+        project.evaluations.push(id)
+        project.save(function(err, res){
+          if(err) throw err;
+          res.writeHead(200, {'Content-Type':'text-plain'});
+          res.json(id);
+          res.end('Added evaluation - id:' + id + " to project - id:" + req.params.projectId);
+        });
+      });
+
+    });
   });
 
 router.route('/:courseId/project/:projectId/evaluations/:evaluationId')
   .get(function(req, res, next){
-
+    evaluations.findById(req.params.evaluationId, function(err, evaluation){
+      if(err) throw err;
+      res.json(evaluation);
+    })
   })
   .put(function(req, res, next){
-
+    evaluations.findByIdAndUpdate(req.params.evaluationId, {
+      $set:req.body //assuming body contains the update which it will if getting from form
+      //Step 1 - find project and update it
+    },{
+      new: true
+    }, function(err, evaluation){
+        if(err) throw err;
+        res.json(evaluation)
+    })
   })
   .delete(function(req, res, next){
-
+    evaluations.findByIdAndRemove(req.params.evaluationId, function(err, res){
+      if(err) throw err;
+      res.json(res);
+    })
   });
 
 module.exports = courseRouter;
-
-    
