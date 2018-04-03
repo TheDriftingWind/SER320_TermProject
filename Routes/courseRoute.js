@@ -18,7 +18,7 @@ router.route('/')
         if(err)
             throw err;
 
-        res.writeHead(200, {'Content/Type': 'text-plain'});
+        //res.writeHead(200, {'Content/Type': 'text-plain'});
         res.end('Course '+course._id+' has been created');
         })
   });
@@ -46,7 +46,7 @@ router.route('/:courseId/students')
         res.json(course.students);
     })
   })
-  .post(function(req, res, next){
+  .post(function(req, res, next){ //only add students
     courses.findById(req.params.courseId, function(err,course){
         if (err) throw err;
         course.students.push(req.body);
@@ -101,7 +101,7 @@ router.route('/:courseId/project')
         course.projects.push(id);
         course.save(function(err, res){
           if(err) throw err;
-          res.writeHead(200, {'Content-Type':'text-plain'});
+          //res.writeHead(200, {'Content-Type':'text-plain'});
           res.json(id);
           res.end('Added project - id:' + id + " to course - id:" + req.params.courseId);
         });
@@ -153,7 +153,7 @@ router.route('/:courseId/project/:projectId/evaluations')
         project.evaluations.push(id)
         project.save(function(err, res){
           if(err) throw err;
-          res.writeHead(200, {'Content-Type':'text-plain'});
+          //res.writeHead(200, {'Content-Type':'text-plain'});
           res.json(id);
           res.end('Added evaluation - id:' + id + " to project - id:" + req.params.projectId);
         });

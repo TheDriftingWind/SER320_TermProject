@@ -1,6 +1,6 @@
 var express = require('express');
 var studentRouter = express.Router();
-var student = require('../models/student');
+var students = require('../models/student');
 
 router.route('/')
   .get(function(req, res, next){
@@ -8,6 +8,7 @@ router.route('/')
   })
   .post(function(req, res, next){
     //make new student account
+    students.create(req.body, function(err, student))
   });
 
 

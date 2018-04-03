@@ -1,6 +1,6 @@
 var express = require('express');
 var professorRouter = express.Router();
-var professor = require('../models/professor');
+var professors = require('../models/professor');
 
 router.route('/')
   .get(function(req, res, next){
@@ -8,6 +8,10 @@ router.route('/')
   })
   .post(function(req, res, next){
     //make new student account
+    professors.create(req.body, function(err, professor){
+      if(err) throw err;
+      res.end('Course '+professor._id+' has been created');
+    });
   });
 
 
