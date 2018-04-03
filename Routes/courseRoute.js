@@ -1,5 +1,5 @@
 var express = require('express');
-var router = express.Router();
+var courseRouter = express.Router();
 var courses = require('../models/course');
 
 var mongoose = require('mongoose');
@@ -81,4 +81,4 @@ router.route('/:courseId/project/:projectId/evaluations/:evaluationId')
 
   });
 
-module.exports = router;
+module.exports = courseRouter;
