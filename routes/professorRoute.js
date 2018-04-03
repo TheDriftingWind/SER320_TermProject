@@ -1,6 +1,6 @@
 var express = require('express');
-var studentRouter = express.Router();
-var student = require('../models/student');
+var professorRouter = express.Router();
+var professor = require('../models/professor');
 
 router.route('/')
   .get(function(req, res, next){
@@ -19,4 +19,4 @@ router.route('/:id')
     //update student information
   });
 
-module.exports = studentRouter;
+module.exports = professorRouter;
