@@ -6,7 +6,7 @@ var evaluations = require('../models/evaluation');
 
 var mongoose = require('mongoose');
 
-router.route('/')
+courseRouter.route('/')
   .get(function(req, res, next){
     courses.find({}, function(err, courses){
       if(err) throw err;
@@ -23,7 +23,7 @@ router.route('/')
         })
   });
 
-router.route('/:courseId')
+courseRouter.route('/:courseId')
   .get(function(req, res, next){
     courses.findById(req.params.courseId, function(err, course){
         if(err)
@@ -39,24 +39,16 @@ router.route('/:courseId')
     })
   });
 
-router.route('/:courseId/students')
+courseRouter.route('/:courseId/students')
   .get(function(req, res, next){
     courses.findById(req.params.courseId, function(err, course){
         if(err) throw err;
         res.json(course.students);
     })
-  })
-  .post(function(req, res, next){ //only add students
-    courses.findById(req.params.courseId, function(err,course){
-        if (err) throw err;
-        course.students.push(req.body);
-        courses.save(function(err,course){
-            res.json(course);
-        })
-    })
   });
+  
 
-router.route('/:courseId/students/:studentId')
+courseRouter.route('/:courseId/students/:studentId')
   .get(function(req, res, next){
      courses.findById(req.params.courseId, function(err, course){
         if(err)
@@ -78,9 +70,19 @@ router.route('/:courseId/students/:studentId')
         res.json(resp);
     })
     });
-  });
+  })
 
-router.route('/:courseId/project')
+.post(function(req, res, next){ //only add students
+    courses.findById(req.params.courseId, function(err,course){
+        if (err) throw err;
+        course.students.push(req.params.studentId);
+        course.save(function(err,course){
+            res.json(course);
+        })
+    })
+  });;
+
+courseRouter.route('/:courseId/projects')
   .get(function(req, res, next){
     courses.findById(req.params.courseId, function(err, course){
       if(err) throw err;
@@ -99,21 +101,22 @@ router.route('/:courseId/project')
         if(err) throw err;
         // Add the new projectId
         course.projects.push(id);
-        course.save(function(err, res){
+        res.json(id);
+        res.end('Added project - id:' + id + " to course - id:" + req.params.courseId);
+        course.save(function(err, course){
           if(err) throw err;
           //res.writeHead(200, {'Content-Type':'text-plain'});
-          res.json(id);
-          res.end('Added project - id:' + id + " to course - id:" + req.params.courseId);
+         
         });
-      }
+      })
     })
   });
 
-router.route('/:courseId/project/:projectId')
+courseRouter.route('/:courseId/projects/:projectId')
   .get(function(req, res, next){
     projects.findById(req.params.projectId, function(err, project){
       if(err) throw err;
-      res.json(recipe);
+      res.json(project);
     });
   })
   .put(function(req, res, next){
@@ -136,7 +139,7 @@ router.route('/:courseId/project/:projectId')
     });
   });
 
-router.route('/:courseId/project/:projectId/evaluations')
+courseRouter.route('/:courseId/projects/:projectId/evaluations')
   .get(function(req, res, next){
     evaluations.find({}, function(err, evaluations){
       if(err) throw err;
@@ -150,19 +153,20 @@ router.route('/:courseId/project/:projectId/evaluations')
       var id = evaluation._id;
       projects.findById(req.params.projectId, function(err, project){
         if(err) throw err;
-        project.evaluations.push(id)
-        project.save(function(err, res){
+        project.evaluations.push(id);
+        res.json(id);
+        res.end('Added evaluation - id:' + id + " to project - id:" + req.params.projectId);
+        project.save(function(err, project){
           if(err) throw err;
           //res.writeHead(200, {'Content-Type':'text-plain'});
-          res.json(id);
-          res.end('Added evaluation - id:' + id + " to project - id:" + req.params.projectId);
+          
         });
       });
 
     });
   });
 
-router.route('/:courseId/project/:projectId/evaluations/:evaluationId')
+courseRouter.route('/:courseId/projects/:projectId/evaluations/:evaluationId')
   .get(function(req, res, next){
     evaluations.findById(req.params.evaluationId, function(err, evaluation){
       if(err) throw err;

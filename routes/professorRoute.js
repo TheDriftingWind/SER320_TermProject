@@ -1,8 +1,9 @@
 var express = require('express');
 var professorRouter = express.Router();
 var professors = require('../models/professor');
+var mongoose = require('mongoose');
 
-router.route('/')
+professorRouter.route('/')
   .get(function(req, res, next){
     //get a list of all students
   })
@@ -15,7 +16,7 @@ router.route('/')
   });
 
 
-router.route('/:id')
+professorRouter.route('/:id')
   .get(function(req, res, next){
     //get info for a student by ID
   })
