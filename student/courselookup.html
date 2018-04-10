@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Course</title>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-default" style="width: 100%; z-index: 9999;">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">PEWA</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="courselookup.html">Search Courses</a></li>
+            <li><a href="../index.html">Log Out</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+  <div class="container">
+    <header>
+      <h1>Course Lookup</h1>
+    </header>
+  </div>
+    <div class="container">
+      <form>
+        <label>Search</label>
+        <input type="text" class="form-control" placeholder="Enter Course Name or Number"/>
+      </form>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Course Name</th>
+            <th>Course Number</th>
+            <th>Instructor</th>
+            <th>Term</th>
+            <th><!--placeholder btn--></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>SER210</td>
+            <td>000001</td>
+            <td>Prof. Ruby</td>
+            <td>SPRING 2017</td>
+            <td><a href="home.html" class="btn btn-success">Add Course</a>
+          </tr>
+          <tr>
+            <td>CSC305</td>
+            <td>000002</td>
+            <td>Prof. Christov</td>
+            <td>FALL 2017</td>
+            <td><a href="home.html" class="btn btn-success">Add Course</a>
+          </tr>
+          <tr>
+            <td>SER225</td>
+            <td>000003</td>
+            <td>Prof. Hoffman</td>
+            <td>SPRING 2017</td>
+            <td><a href="home.html" class="btn btn-success">Add Course</a>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

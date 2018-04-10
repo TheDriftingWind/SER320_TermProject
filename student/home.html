@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Student | Home</title>
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-default" style="width: 100%; z-index: 9999;">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">PEWA</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="home.html">Home</a></li>
+          <li><a href="courselookup.html">Search Courses</a></li>
+          <li><a href="../index.html">Log Out</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+      <h1>Student | Home</h1>
+
+      <hr />
+
+      <div class="row">
+        <div class="col-sm-5 boxed pb10">
+          <h3>My Courses</h3>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Course Name</th>
+                <th>Course #</th>
+                <th>Course ID</th>
+                <th>Instructor</th>
+                <th>Term</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a href="course.html?course=ser225">Software Development</a></td>
+                <td>SER225</td>
+                <td>000001</td>
+                <td>Prof. Hoffman</td>
+                <td>SPRING2017</td>
+              </td>
+            </tbody>
+          </table>
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              Add Course
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li><a href="courselookup.html">Search Courses</a></li>
+              <li><a href="addCourseByID.html">Add by CourseID</a></li>
+            </ul>
+          </div>
+        </div>
+
+    </div>
+
+  </div>
+
+</body>
+
+</html>

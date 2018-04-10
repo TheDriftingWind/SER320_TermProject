@@ -70,7 +70,7 @@ courseRouter.route('/:courseId/students/:studentId')
         res.json(resp);
     })
     });
-  })
+  });
 
 .post(function(req, res, next){ //only add students
     courses.findById(req.params.courseId, function(err,course){
@@ -80,7 +80,7 @@ courseRouter.route('/:courseId/students/:studentId')
             res.json(course);
         })
     })
-  });;
+  });
 
 courseRouter.route('/:courseId/projects')
   .get(function(req, res, next){

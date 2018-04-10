@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Evaluation</title>
+  <link rel="stylesheet" type="text/css" href="../css/style.css" />
+  <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+  <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../js/functions.js"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-default" style="width: 100%; z-index: 9999;">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">PEWA</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="home.html">Home</a></li>
+          <li><a href="courselookup.html">Search Courses</a></li>
+          <li><a href="../index.html">Log Out</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+   <header>
+     <h1>Team Form - <span id="addUpdate"></span></h1>
+     <script type="text/javascript">
+       var team = getUrlParameter('team');
+       if(team)
+         document.getElementById('addUpdate').innerHTML = 'Update';
+       else
+         document.getElementById('addUpdate').innerHTML = 'Add';
+     </script>
+   </header>
+  </div>
+  <div class="container boxed pb10 pt10">
+    <form class="form-inline">
+      <label>Team Name</label>
+      <input type="text" class="form-control" name="team" id="teamName" required></input>
+      <script type="text/javascript">
+        var team = getUrlParameter('team');
+        if(team)
+          document.getElementById('teamName').setAttribute("value", team);
+
+      </script>
+      <input type="submit" value="Set Name" class="btn btn-primary" />
+    </form>
+  </div>
+
+  <div class="container boxed mt10 pb10" >
+    <table class="table table-hover" id="students">
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Charles</td>
+          <td>Zhu</td>
+          <td><a href="#" class="btn btn-danger">Remove</a></td>
+        </tr>
+        <tr>
+          <td>Carly</td>
+          <td>Emile</td>
+          <td><a href="#" class="btn btn-danger">Remove</a></td>
+        </tr>
+        <tr>
+          <td>Larry</td>
+          <td>Fine</td>
+          <td><a href="#" class="btn btn-danger">Remove</a></td>
+        </tr>
+        <tr>
+          <td>Moe</td>
+          <td>Howard</td>
+          <td><a href="#" class="btn btn-danger">Remove</a></td>
+        </tr>
+        <tr>
+          <td>Curly</td>
+          <td>Howard</td>
+          <td><a href="#" class="btn btn-danger">Remove</a></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Add Student
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="p_student_lookup.html?addTo=001">Search Students</a></li>
+        <li>
+          <label>Upload Roster</label>
+          <form>
+            <input type="file" name="file" id="file"/>
+          </form>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <script type="text/javascript">
+    var team = getUrlParameter('team');
+    if(!team)
+      document.getElementById('students').innerHTML = '';
+
+  </script>
+
+</body>
+
+</html>

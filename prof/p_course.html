@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Courses</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+
+</head>
+
+<body>
+  <nav class="navbar navbar-default" style="width: 100%; z-index: 9999;">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">PEWA</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="p_home.html">Home</a></li>
+          <li><a href="courselookup.html">Search Courses</a></li>
+          <li><a href="../index.html">Log Out</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <header>
+      <h1>Course</h1>
+    </header>
+  </div>
+
+  <div class="container boxed">
+    <h3>Details</h3>
+    <h4><b>Course Name:</b> Software Developement</h4>
+    <p><b>Course #:</b> SER225</p>
+    <p><b>Course ID:</b> 0001010</p>
+  </div>
+
+  <div class="container boxed mt10 pb10">
+    <h3>Actions</h3>
+    <a href="p_project_form.html" class="btn btn-primary">Create New Project</a>
+  </div>
+
+  <div class="container boxed mt10">
+    <h3>Projects</h3>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Project ID</th>
+          <th>Project Name</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th><!--Btn placeholder--></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Scrum Cycle Week 1</td>
+          <td>11/1/2017</td>
+          <td>11/14/2017</td>
+          <td>
+            <a href="p_project.html?title=Scrum Cycle Week 1" class="btn btn-primary">View</a>
+            <a href="p_project_form.html?project=Scrum Cycle Week 1&start=11/1/2017&end=11/14/2017" class="btn btn-primary">Edit</a>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Scrum Cycle Week 2</td>
+          <td>11/16/2017</td>
+          <td>11/30/2017</td>
+          <td>
+            <a href="p_project.html?title=Scrum Cycle Week 2" class="btn btn-primary">View</a>
+            <a href="p_project_form.html?project=Scrum Cycle Week 2&start=11/16/2017&end=11/30/2017" class="btn btn-primary">Edit</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+
+</html>

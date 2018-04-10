@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project Form</title>
+  <link rel="stylesheet" type="text/css" href="../css/style.css" />
+  <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+  <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../js/functions.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-default" style="width: 100%; z-index: 9999;">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">PEWA</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="home.html">Home</a></li>
+          <li><a href="courselookup.html">Search Courses</a></li>
+          <li><a href="../index.html">Log Out</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+   <header>
+     <h1>Project Form - <span id="addUpdate"></span></h1>
+     <script type="text/javascript">
+       var project = getUrlParameter('project');
+       if(project)
+         document.getElementById('addUpdate').innerHTML = 'Update';
+       else
+         document.getElementById('addUpdate').innerHTML = 'Add';
+     </script>
+   </header>
+  </div>
+  <div class="container boxed pb10 pt10">
+    <form>
+      <label>Project Name</label>
+      <input type="text" class="form-control" name="project" id="projectName" required></input>
+      <script type="text/javascript">
+        var team = getUrlParameter('project');
+        if(team)
+          document.getElementById('projectName').setAttribute("value", team);
+      </script>
+
+      <label>Start Date</label>
+      <input type="text" class="form-control" name="project" id="startDate" required></input>
+
+      <label>End Date</label>
+      <input type="text" class="form-control" name="project" id="endDate" required></input>
+      <script type="text/javascript">
+        var start = getUrlParameter('start');
+        var end = getUrlParameter('end');
+        if(start)
+          document.getElementById('startDate').setAttribute("value", start);
+        if(end)
+          document.getElementById('endDate').setAttribute("value", end);
+      </script>
+
+      <script>
+        $( function() {
+          $( "#startDate,#endDate" ).datepicker();
+        } );
+      </script>
+
+      <input type="submit" value="Submit" class="btn btn-primary mt10" />
+
+    </form>
+  </div>
+
+</body>
+
+</html>

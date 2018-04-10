@@ -6,7 +6,7 @@ var logger = require('morgan');
 
 var courseRoute = require('./routes/courseRoute');
 var studentRoute = require('./routes/studentRoute');
-var professorRoute = require('./routes/professorRoute');
+//var professorRoute = require('./routes/professorRoute');
 
 var mongoose = require('mongoose');
 var url = 'mongodb://localhost:27017/PEWA';
@@ -29,7 +29,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/courses', courseRoute);
-app.use('/professors', professorRoute);
+//app.use('/professors', professorRoute);
 app.use('/students', studentRoute);
 
 // catch 404 and forward to error handler

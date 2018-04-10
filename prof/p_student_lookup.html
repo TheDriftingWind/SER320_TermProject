@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Course</title>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-default" style="width: 100%; z-index: 9999;">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">PEWA</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="courselookup.html">Search Courses</a></li>
+            <li><a href="../index.html">Log Out</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+  <div class="container">
+    <header>
+      <h1>Student Lookup</h1>
+    </header>
+  </div>
+    <div class="container">
+      <form>
+        <label>Search</label>
+        <input type="text" class="form-control" placeholder="Enter Course Name or Number"/>
+      </form>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>StudentID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th><!--placeholder btn--></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>000001</td>
+            <td>Charles</td>
+            <td>Zhu</td>
+            <td><a href="p_team_form.html?team=A1" class="btn btn-success">Add to Team</a>
+          </tr>
+          <tr>
+            <td>000002</td>
+            <td>Carly</td>
+            <td>Emile</td>
+            <td><a href="p_team_form.html?team=A1" class="btn btn-success">Add to Team</a>
+          </tr>
+          <tr>
+            <td>000007</td>
+            <td>James</td>
+            <td>Bond</td>
+            <td><a href="p_team_form.html?team=A1" class="btn btn-success">Add to Team</a>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
