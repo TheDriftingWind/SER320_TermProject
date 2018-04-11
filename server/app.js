@@ -1,5 +1,8 @@
 var createError = require('http-errors');
 var express = require('express');
+var jwt = require('jwt-simple'),// 4/22 add jwt and _
+//var _ = require('underscore');
+//var async = require("async");
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -17,6 +20,9 @@ db.once('open', function(){
 	console.log('Connected to MongoDB');
 })
 var app = express();
+
+app.set('jwtTokenSecret', '123456ABCDEF'); //token authentication
+var tokens = [];
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
