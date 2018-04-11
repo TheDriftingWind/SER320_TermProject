@@ -11,6 +11,7 @@ courseRouter.route('/')
     courses.find({}, function(err, courses){
       if(err) throw err;
       res.json(courses);
+      //res.end('done');
     });
   })
   .post(function(req, res, next) { //prof. make a new course (Req 5.2)
@@ -46,7 +47,7 @@ courseRouter.route('/:courseId/students')
         res.json(course.students);
     })
   });
-  
+
 
 courseRouter.route('/:courseId/students/:studentId')
   .get(function(req, res, next){
@@ -70,7 +71,7 @@ courseRouter.route('/:courseId/students/:studentId')
         res.json(resp);
     })
     });
-  });
+  })
 
 .post(function(req, res, next){ //only add students
     courses.findById(req.params.courseId, function(err,course){
@@ -106,7 +107,7 @@ courseRouter.route('/:courseId/projects')
         course.save(function(err, course){
           if(err) throw err;
           //res.writeHead(200, {'Content-Type':'text-plain'});
-         
+
         });
       })
     })
@@ -159,7 +160,7 @@ courseRouter.route('/:courseId/projects/:projectId/evaluations')
         project.save(function(err, project){
           if(err) throw err;
           //res.writeHead(200, {'Content-Type':'text-plain'});
-          
+
         });
       });
 
