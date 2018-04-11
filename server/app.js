@@ -1,7 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
-var jwt = require('jwt-simple'),// 4/22 add jwt and _
-//var _ = require('underscore');
+var jwt = require('jwt-simple');// 4/22 add jwt and _
+var _ = require('underscore');
 //var async = require("async");
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -34,7 +34,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/courses', courseRoute);
+function requiresAuthentication(request, response, next) {
+	console.log("called req in route");
+	next()
+}
+
+app.use('/courses', requiresAuthentication, courseRoute);
 //app.use('/professors', professorRoute);
 app.use('/students', studentRoute);
 
