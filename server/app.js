@@ -51,13 +51,13 @@ app.post('/api/professorLogin', function(req, res){
 				var expires = new Date();
 					expires.setDate((new Date()).getDate() + 5);
 					var token = jwt.encode({
-							email: email,
+							id: professor._id,
 							expires: expires
 					}, app.get('jwtTokenSecret'));
 
 					tokens.push(token);
 
-					res.send(200, { access_token: token, id: student._id });
+					res.send(200, { access_token: token, id: professor._id });
 			}
 	});
 });
@@ -72,7 +72,7 @@ app.post('/api/studentLogin', function(req, res){
 			var expires = new Date();
       expires.setDate((new Date()).getDate() + 5);
       var token = jwt.encode({
-          email: email,
+          id: student._id,
           expires: expires
       }, app.get('jwtTokenSecret'));
 
