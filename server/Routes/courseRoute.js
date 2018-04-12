@@ -140,14 +140,14 @@ courseRouter.route('/:courseId/projects/:projectId')
     });
   });
 
-courseRouter.route('/:courseId/projects/:projectId/evaluations')
+courseRouter.route('/:courseId/projects/:projectId/evaluations') //gets all the evaluations in the specific project
   .get(function(req, res, next){
     evaluations.find({}, function(err, evaluations){
       if(err) throw err;
       res.json(evaluations);
     });
   })
-  .post(function(req, res, next){
+  .post(function(req, res, next){ // adds an evaluation to a specfic project
     evaluations.create(req.body, function(err, evaluation){
       if(err) throw err;
 
@@ -167,7 +167,7 @@ courseRouter.route('/:courseId/projects/:projectId/evaluations')
     });
   });
 
-courseRouter.route('/:courseId/projects/:projectId/evaluations/:evaluationId')
+courseRouter.route('/:courseId/projects/:projectId/evaluations/:evaluationId') // gets a specific evaluation
   .get(function(req, res, next){
     evaluations.findById(req.params.evaluationId, function(err, evaluation){
       if(err) throw err;
