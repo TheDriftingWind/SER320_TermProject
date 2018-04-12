@@ -12,7 +12,6 @@ professorRouter.route('/')
     });
         
     })
-  })
   .post(function(req, res, next){
     //make new professor account
     professors.create(req.body, function(err, professor){

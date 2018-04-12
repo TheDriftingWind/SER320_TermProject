@@ -9,7 +9,7 @@ var logger = require('morgan');
 
 var courseRoute = require('./routes/courseRoute');
 var studentRoute = require('./routes/studentRoute');
-//var professorRoute = require('./routes/professorRoute');
+var professorRoute = require('./routes/professorRoute');
 
 //models for login
 var students = require('./models/student');
@@ -47,7 +47,6 @@ app.post('/api/professorLogin', function(req, res){
 				  res.send(401, "Invalid credentials");
 			}
 			else{
-				res.json(professor);
 				var expires = new Date();
 					expires.setDate((new Date()).getDate() + 5);
 					var token = jwt.encode({

@@ -1,6 +1,7 @@
 var express = require('express');
 var courseRouter = express.Router();
 var courses = require('../models/course');
+var students = require('../models/student');
 var projects = require('../models/project');
 var evaluations = require('../models/evaluation');
 
@@ -46,6 +47,15 @@ courseRouter.route('/:courseId/students')
         if(err) throw err;
         res.json(course.students);
     })
+  })
+.post(function(req, res, next){ //only add students
+   courses.findById(req.params.courseId, function(err, course){
+        if(err) throw err;
+        course.students.push(req.body.studentId);
+       course.save(function(err, course){
+           res.json(course);
+       })
+    })
   });
 
 
@@ -55,7 +65,7 @@ courseRouter.route('/:courseId/students/:studentId')
         if(err)
             throw err;
 
-    course.students.findById(req.params.studentId, function(err, student){
+    students.findById(req.params.studentId, function(err, student){
         if(err) throw err;
         res.json(student);
     })
@@ -71,16 +81,6 @@ courseRouter.route('/:courseId/students/:studentId')
         res.json(resp);
     })
     });
-  })
-
-.post(function(req, res, next){ //only add students
-    courses.findById(req.params.courseId, function(err,course){
-        if (err) throw err;
-        course.students.push(req.params.studentId);
-        course.save(function(err,course){
-            res.json(course);
-        })
-    })
   });
 
 courseRouter.route('/:courseId/projects')
