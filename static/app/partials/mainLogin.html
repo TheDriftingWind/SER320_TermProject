@@ -1,0 +1,45 @@
+<div class=" login-box container text-center">
+    <h1 style="text-align: center">PEWA</h1>
+    <h6>Peer Evaluation Web Application</h6>
+    <br></br>
+
+
+    <ul class="nav nav-pills">
+        <li class="active"><a data-toggle="pill" href="">Student</a></li>
+        <li><a data-toggle="pill" href="">Professor</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="student" class="tab-pane fade in active">
+          <h4>Student Login</h4>
+          <form action="student/home.html">
+            <div class="form-group">
+              <label for="username">Email</label>
+              <input type="text" class="form-control" name="username"></input>
+            </div>
+            <div class="form-group">
+              <label for="pwd">Password</label>
+              <input type="password" class="form-control" name="pwd"></input>
+            </div>
+            <button type="submit" class="btn btn-default">Sign In</button>
+          </form>
+        </div>
+        <div id="professor" class="tab-pane fade">
+          <h4>Instructor Login</h4>
+          <form action="prof/p_home.html">
+            <div class="form-group">
+              <label for="username">Email</label>
+              <input type="text" class="form-control" name="username"></input>
+            </div>
+            <div class="form-group">
+              <label for="pwd">Password</label>
+              <input type="password" class="form-control" name="pwd"></input>
+            </div>
+            <button type="submit" class="btn btn-default">Sign In</button>
+          </form>
+        </div>
+      </div>
+
+    <br></br>
+    <a href="registration.html">Click here to register.</a>
+</div>
