@@ -10,7 +10,7 @@ professorRouter.route('/')
         if(err) throw err;
         res.json(professors);
     });
-        
+
     })
   .post(function(req, res, next){
     //make new professor account
@@ -37,6 +37,15 @@ professorRouter.route('/:professorId')
                               {$set: req.body}, {new : true}, function(err, professor){
         if(err) throw err;
         res.json(professor);
+    });
+  });
+
+professorRouter.route('/emailExists/:checkEmail')
+  .get(function(req,res,next){
+    professors.find({email: req.params.checkEmail}, function(err, email){ //find email
+      if(err) throw err;
+      res.setHeader('Content-Type', 'application/json');
+      res.json(email); //return what you find. Will be empty if doesn't exist
     });
   });
 

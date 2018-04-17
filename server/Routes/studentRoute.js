@@ -5,8 +5,10 @@ var mongoose = require('mongoose');
 
 studentRouter.route('/')
   .get(function(req, res, next){
-    students.find({}, function(err, courses){
+    students.find({}, function(err, students){
       if(err) throw err;
+      // res.header("Access-Control-Allow-Origin", "*");
+      // res.header("Access-Control-Allow-Headers", "X-Requested-With");
       res.json(students);
     });
     })
@@ -41,6 +43,14 @@ studentRouter.route('/:studentId')
         if(err) throw err;
         res.json(student._id)
     })
+  });
+
+studentRouter.route('/emailExists/:checkEmail')
+  .get(function(req,res, next){
+    students.find({email: req.params.checkEmail}, function(err, email){ //find email
+      if(err) throw err;
+      res.json(email); //return what you find. Will be empty if doesn't exist
+    });
   });
 
 module.exports = studentRouter;

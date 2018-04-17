@@ -7,6 +7,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+//var cors = require('cors');
+
 var courseRoute = require('./routes/courseRoute');
 var studentRoute = require('./routes/studentRoute');
 var professorRoute = require('./routes/professorRoute');
@@ -33,12 +35,55 @@ var tokens = [];
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+//app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(function(req, res, next) { // Allow CORS
+  //res.header("Access-Control-Allow-Origin", "localhost:3000");
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+  // res.header('Access-Control-Allow-Headers', 'Content-Type');
+	//res.header('Access-Control-Allow-Origin: *');
+	res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+	// res.header('Access-Control-Request-Headers: Accept, X-Requested-With');
+	res.header("Access-Control-Allow-Credentials", "true");
+	res.header('Content-Type', 'application/json');
+	// res.header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, token");
+	//res.status(200);
+  next();
+});
+
+// app.use(function(req, res, next) {
+//     var oneof = false;
+//     if(req.headers.origin) {
+//         res.header('Access-Control-Allow-Origin', req.headers.origin);
+//         oneof = true;
+//     }
+//     if(req.headers['access-control-request-method']) {
+//         res.header('Access-Control-Allow-Methods', req.headers['access-control-request-method']);
+//         oneof = true;
+//     }
+//     if(req.headers['access-control-request-headers']) {
+//         res.header('Access-Control-Allow-Headers', req.headers['access-control-request-headers']);
+//         oneof = true;
+//     }
+//     if(oneof) {
+//         res.header('Access-Control-Max-Age', 60 * 60 * 24 * 365);
+//     }
+//
+//     // intercept OPTIONS method
+//     if (oneof && req.method == 'OPTIONS') {
+//         res.send(200);
+//     }
+//     else {
+//         next();
+//     }
+// });
 
 app.post('/api/professorLogin', function(req, res){ //authenticates the professor if login is correct
 	professors.findOne({email:req.body.email, password: req.body.password}, function(err, professor){

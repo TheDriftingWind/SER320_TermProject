@@ -6,6 +6,12 @@ app.config(function($routeProvider){
       controller: "HomeCtrl",
       templateUrl: "app/partials/mainLogin.html"
   })
-  .otherwise({});
+  .when("/register", {
+    controller: "RegisterCtrl",
+    templateUrl: "app/partials/registration.html"
+  })
+  .otherwise({
+    
+  });
 
 })
