@@ -6,18 +6,23 @@
     <script type="text/javascript" src="js/angular.min.js"></script>
     <script type="text/javascript" src="js/angular-route.min.js"></script>
     <script type="text/javascript" src="js/angular-resource.min.js"></script>
-    <!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> -->
-    <!-- <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script> -->
+
   </head>
 
   <body>
   <!-- Partials appear here -->
     <div id="content" ng-view></div>
 
+    <!-- App -->
     <script type="text/javascript" src="app/app.js"></script>
+
+
+    <!-- Controllers -->
     <script type="text/javascript" src="app/controllers/homeCtrl.js"></script>
     <script type="text/javascript" src="app/controllers/registerCtrl.js"></script>
 
+    <!-- Services -->
+    <script type="text/javascript" src="app/services/MainSvc.js"></script>
   </body>
 
 </html>

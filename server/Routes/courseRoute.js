@@ -4,6 +4,7 @@ var courses = require('../models/course');
 var students = require('../models/student');
 var projects = require('../models/project');
 var evaluations = require('../models/evaluation');
+var teams = require('../models/team.js')
 
 var mongoose = require('mongoose');
 
@@ -40,6 +41,38 @@ courseRouter.route('/:courseId')
         res.json(resp);
     })
   });
+
+courseRouter.route('/:courseId/teams') //add new teams and get all teams
+  .get(function(req, res, next){
+    teams.find({}, function(err, teams){
+      if(err) throw err
+      res.json(teams);
+    });
+  })
+  .post(function(req, res, next){
+    teams.create(req.body, function(err, team){
+      res.json(team._id);
+    });
+  });
+
+  courseRouter.route('/:courseId/teams/:teamId')
+  .get(function(req, res, next){
+    teams.findById(req.params.teamId, function(err, team){
+      if(err) throw err
+      res.json(team);
+    })
+  })
+  .put(function(req, res, next){
+    team.findByIdAndUpdate(req.params.teamId, {
+        $set:req.body //assuming body contains the update which it will if getting from form
+        //Step 1 - find project and update it
+      },{
+        new: true
+      }, function(err, project){
+          if(err) throw err;
+          res.json(project);
+      });
+    })
 
 courseRouter.route('/:courseId/students')
   .get(function(req, res, next){
