@@ -16,11 +16,11 @@
           <form novalidate>
             <div class="form-group">
               <label for="username">Email</label>
-              <input type="text" class="form-control" name="username"></input>
+              <input type="text" class="form-control" name="username" ng-model="studentEmail"></input>
             </div>
             <div class="form-group">
               <label for="pwd">Password</label>
-              <input type="password" class="form-control" name="pwd"></input>
+              <input type="password" class="form-control" name="pwd" ng-model="studentPassword"></input>
             </div>
             <button class="btn btn-default" ng-click="studentLogin()">Sign In</button>
           </form>
@@ -32,11 +32,11 @@
           <form novalidate>
             <div class="form-group">
               <label for="username">Email</label>
-              <input type="text" class="form-control" name="username"></input>
+              <input type="text" class="form-control" name="username" ng-model="profEmail"></input>
             </div>
             <div class="form-group">
               <label for="pwd">Password</label>
-              <input type="password" class="form-control" name="pwd"></input>
+              <input type="password" class="form-control" name="pwd" ng-model="profPassword"></input>
             </div>
             <button class="btn btn-default" ng-click="professorLogin()">Sign In</button>
           </form>

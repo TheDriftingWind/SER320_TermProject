@@ -131,7 +131,9 @@ app.post('/api/studentLogin', function(req, res){//authenticates the professor i
 });
 
 app.post('/api/logout', function(res, req){
-
+	var token= request.headers.access_token;
+    removeFromTokens(token);
+    response.send(200);
 });
 
 
