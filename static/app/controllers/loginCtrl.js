@@ -6,7 +6,7 @@ app.controller("LoginCtrl", ["authSvc", "$scope", "$http", "$window","$location"
   function studentLogin(){
     authSvc.studentLogin($scope.studentEmail, $scope.studentPassword).then(function(res){
         if(res.access_token){ //if service respond with token, login succeeded
-          $location.path('#/home/')
+          $location.path('/student/')
         } else { //else login failed
           $window.alert('Invalid Password or Email')
         }
@@ -17,7 +17,7 @@ app.controller("LoginCtrl", ["authSvc", "$scope", "$http", "$window","$location"
   function professorLogin(){
     authSvc.professorLogin($scope.profEmail, $scope.profPassword).then(function(res){
         if(res.access_token){ //if service respond with token, login succeeded
-          $location.path('#/home/')
+          $location.path('/student/')
         } else { //else login failed
           $window.alert('Invalid Password or Email')
         }

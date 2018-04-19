@@ -1,4 +1,4 @@
-app.factory("authSvc", ["$http", "$location", function($http, $location){
+app.factory("authSvc", ["$http", "$location", "$window", function($http, $location, $window){
 
   var userInfo;
 
@@ -45,15 +45,15 @@ app.factory("authSvc", ["$http", "$location", function($http, $location){
     })
   }
 
-  function getToken(){ //get the token for the session -- needed in the header for all HTTP methods
-    return $window.sessionStorage["userInfo"]
-  }
+  // function getToken(){ //get the token for the session -- needed in the header for all HTTP methods
+  //   return userInfo
+  // }
 
   return {
         studentLogin: studentLogin,
         professorLogin: professorLogin,
         logout: logout,
-        getToken: getToken
+        // getToken: getToken
       };
 
 }]);

@@ -1,8 +1,10 @@
-app.controller("studentHomeCtrl", ["studentService", "$scope", "$location", "$window", 'autoSvc' , function(studentService, $scope, $location, $window, authSvc){
+app.controller("studentHomeCtrl", ["studentService", "authSvc", "$scope", "$location", "$window" , function(studentService, authSvc, $scope, $location, $window){
 
-$scope.student = studentService.getStudentById(authSvc.getToken.id);
+studentService.getStudentById('5ad8deee521b44437885b38c').then(function(res){
+  $scope.student = res;
+});
 
-studentService.getStudentCourses(authSvc.getToken.id).then(function(res){
+studentService.getStudentCourses('5ad8deee521b44437885b38c').then(function(res){
     $scope.courses = res;
 });
 

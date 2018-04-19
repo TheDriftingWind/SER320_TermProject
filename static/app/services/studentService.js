@@ -1,23 +1,25 @@
-app.factory("mainSvc", ["$http", "$location", function($http, $location){
+app.factory("studentService", ["$http", "$location", function($http, $location){
 
     function getStudentById(studentId){
-       return $http.get('http://localhost:3000/students/' + studentId);
+       return $http.get('http://localhost:3000/students/' + studentId).then(function(res){
+         return res.data;
+       });
     }
     function getStudentCourses(studentId){
-        $http.get('http://localhost:3000/courses/').then(function(res){
-              var studentCourses = [];          
+        return $http.get('http://localhost:3000/courses/').then(function(res){
+              var studentCourses = [];
 
             if(!res){
-               //error in code 
+               //error in code
             }
-            
+
             else{
-                
-                for (var course in res){
+
+                for (var course in res.data[0]){
                     var result = course.students.filter(function(student){
                         return student._id == studentId;
                     });
-                    
+
                     if(result.length > 0){
                         studentCourses.push(course);
                     }
@@ -30,7 +32,7 @@ app.factory("mainSvc", ["$http", "$location", function($http, $location){
     function getCourseById(courseId){
          return $http.get('http://localhost:3000/courses/'+courseId);
     }
-        
+
     function getProjects(courseId){
          return $http.get('http://localhost:3000/courses/'+courseId+'/projects/');
     }
@@ -42,7 +44,7 @@ app.factory("mainSvc", ["$http", "$location", function($http, $location){
     function getTeamById(courseId, teamId){
          return $http.get('http://localhost:3000/courses/'+courseId+'/teams/'+teamId);
     }
-    
+
 
     function fillEvaluation(courseId, projectId, evaluator_id, evaluatee_id, f_feedback, f_collaboration, f_contribution, f_responsive, f_status){
          return $http({
@@ -59,7 +61,7 @@ app.factory("mainSvc", ["$http", "$location", function($http, $location){
            headers: {'Content-Type':'application/json'}
          })
        }
-  
+
 
     function continueEvaluation(evaluationId, f_feedback, f_collaboration, f_contribution, f_responsive, f_status){
          return $http({
@@ -77,23 +79,23 @@ app.factory("mainSvc", ["$http", "$location", function($http, $location){
 
     function viewEvaluations(courseId, projectId, studentId){
          $http.get('http://localhost:3000/courses/'+courseId+'/projects/'+projectId+'/evaluations').then(function(res){
-              var studentEvaluations = [];          
+              var studentEvaluations = [];
 
             if(!res){
-               //error in code 
+               //error in code
             }
-            
+
             else{
-                
+
                     studentEvaluations = res.filter(function(evaluation){
                         return evaluation.evaluatee == studentId;
                     });
                 }
-            
+
             return studentEvaluations;
         });
     }
-    
+
     return {
         getStudentById: getStudentById,
         getStudentCourses: getStudentCourses,
@@ -104,6 +106,6 @@ app.factory("mainSvc", ["$http", "$location", function($http, $location){
         fillEvaluation: fillEvaluation,
         continueEvaluation: continueEvaluation,
         viewEvaluations: viewEvaluations
-        
+
     }
 }]);
