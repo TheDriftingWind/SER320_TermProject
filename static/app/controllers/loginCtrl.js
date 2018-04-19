@@ -1,6 +1,7 @@
 app.controller("LoginCtrl", ["authSvc", "$scope", "$http", "$window","$location", function(authSvc, $scope, $http, $window, $location){
 
  $scope.studentLogin = studentLogin;
+ $scope.professorLogin = professorLogin;
 
   function studentLogin(){
     authSvc.studentLogin($scope.studentEmail, $scope.studentPassword).then(function(res){

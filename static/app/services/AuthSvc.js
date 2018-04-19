@@ -3,33 +3,28 @@ app.factory("authSvc", ["$http", "$location", function($http, $location){
   var userInfo;
 
   function studentLogin(sEmail, sPassword){ //compare login entered with credentials found server
-    return $http({
-      method: 'POST',
-      url: 'http://localhost:3000/api/studentLogin',
-      data: {
-              email: sEmail,
-              password: sPassword
-            },
-      headers: {'Content-Type':'application/json'}
-    }).then(function(res){
-      userInfo = {
-        access_token: res.data.access_token,
-        id: res.data.id
-      };
-      $window.sessionStorage["userInfo"] = JSON.stringify(userInfo);
-      return res.data;
-    })
+    return $http({ //Post the new account
+            method: 'POST',
+            url: 'http://localhost:3000/api/studentLogin',
+            data: {
+                    email: sEmail,
+                    password: sPassword
+                  },
+            headers: {'Content-Type':'application/json'}
+          }).then(function(res){
+            return res.data;
+          })
   }
 
-  function professorLogin(pEmail, sPassword){ //compare login entered with credentials found server
+  function professorLogin(pEmail, pPassword){ //compare login entered with credentials found server
     return $http({
       method: 'POST',
       url: 'http://localhost:3000/api/professorLogin',
       data: {
               email: pEmail,
-              password: sPassword
-            },
-      headers: {'Content-Type':'application/json'}
+              password: pPassword
+            }
+      //headers: {'Content-Type':'application/json'}
     }).then(function(res){
       userInfo = {
         access_token: res.data.access_token,
