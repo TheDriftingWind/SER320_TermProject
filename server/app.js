@@ -7,7 +7,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-//var cors = require('cors');
+var cors = require('cors');
 
 var courseRoute = require('./routes/courseRoute');
 var studentRoute = require('./routes/studentRoute');
@@ -35,62 +35,28 @@ var tokens = [];
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-//app.use(cors());
+// app.use(function(req, res, next) { // Allow CORS
+// 	res.header("Access-Control-Allow-Origin", "*");
+// 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, access_token");
+// 	res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+// 	res.header("Access-Control-Allow-Credentials", "true");
+// 	res.header('Content-Type', 'application/json');
+// 	next();
+// });
+app.use(cors({origin: '*'}));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(function(req, res, next) { // Allow CORS
-  //res.header("Access-Control-Allow-Origin", "localhost:3000");
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-  // res.header('Access-Control-Allow-Headers', 'Content-Type');
-	//res.header('Access-Control-Allow-Origin: *');
-	res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-	// res.header('Access-Control-Request-Headers: Accept, X-Requested-With');
-	res.header("Access-Control-Allow-Credentials", "true");
-	res.header('Content-Type', 'application/json');
-	// res.header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, token");
-	//res.status(200);
-  next();
-});
 
-// app.use(function(req, res, next) {
-//     var oneof = false;
-//     if(req.headers.origin) {
-//         res.header('Access-Control-Allow-Origin', req.headers.origin);
-//         oneof = true;
-//     }
-//     if(req.headers['access-control-request-method']) {
-//         res.header('Access-Control-Allow-Methods', req.headers['access-control-request-method']);
-//         oneof = true;
-//     }
-//     if(req.headers['access-control-request-headers']) {
-//         res.header('Access-Control-Allow-Headers', req.headers['access-control-request-headers']);
-//         oneof = true;
-//     }
-//     if(oneof) {
-//         res.header('Access-Control-Max-Age', 60 * 60 * 24 * 365);
-//     }
-//
-//     // intercept OPTIONS method
-//     if (oneof && req.method == 'OPTIONS') {
-//         res.send(200);
-//     }
-//     else {
-//         next();
-//     }
-// });
-
-app.post('/api/professorLogin', function(req, res){ //authenticates the professor if login is correct
+app.post('/api/professorLogin', function(req, res, next){ //authenticates the professor if login is correct
 	professors.findOne({email:req.body.email, password: req.body.password}, function(err, professor){
 			if(err) throw err;
 			//step 1 search the professors collection for the given email and password
 			if(!professor){ //if not found, invalid login
-				  res.send(401, "Invalid credentials");
+				  res.json({'0':"Invalid credentials"});
 			}
 			else{ //if found, make a token for user
 				//creates and sends an access token
@@ -103,17 +69,18 @@ app.post('/api/professorLogin', function(req, res){ //authenticates the professo
 
 					tokens.push(token); //add token to tokens array
 
-					res.send(200, { access_token: token, id: professor._id });//send token to user
+					res.json({ 'access_token': token, 'id': professor._id });//send token to user
 			}
 	});
+//	next()
 });
 
-app.post('/api/studentLogin', function(req, res){//authenticates the professor if login is correct
+app.post('/api/studentLogin', function(req, res, next){//authenticates the professor if login is correct
 	students.findOne({email: req.body.email, password: req.body.password}, function(err, student){
 		if(err) throw err; //search for email and password in student collection
 		if(!student){ //student login credentials not found...
 			//invalid log
-			res.send(401, "Invalid credentials");
+			res.json({'0':"Invalid credentials"});
 		} else {//student found
 			//creates and sends an access token
 			var expires = new Date();
@@ -125,13 +92,16 @@ app.post('/api/studentLogin', function(req, res){//authenticates the professor i
 
       tokens.push(token); //add token to the tokens collection
 
-      res.send(200, { access_token: token, id: student._id }); //give user the token
+      res.json({ 'access_token': token, 'id': student._id }); //give user the token
 		}
 	});
+//	next()
 });
 
 app.post('/api/logout', function(res, req){
-
+	var token= request.headers.access_token;
+    removeFromTokens(token);
+    response.send(200);
 });
 
 

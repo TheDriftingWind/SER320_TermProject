@@ -16,7 +16,8 @@ professorRouter.route('/')
     //make new professor account
     professors.create(req.body, function(err, professor){
       if(err) throw err;
-      res.end('Professor '+professor._id+' has been added');
+      // res.end('Professor '+professor._id+' has been added');
+      res.json(professor)
     });
   });
 

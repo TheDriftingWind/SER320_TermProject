@@ -3,7 +3,7 @@ var app = angular.module("app", ["ngRoute","ngResource"]);
 app.config(function($routeProvider){
   $routeProvider
   .when("/",{
-      controller: "HomeCtrl",
+      controller: "LoginCtrl",
       templateUrl: "app/partials/mainLogin.html"
   })
   .when("/register", {
@@ -15,7 +15,7 @@ app.config(function($routeProvider){
       templateUrl: "app/partials/student/home.html"
   })
   .otherwise({
-    
+
   });
 
 })

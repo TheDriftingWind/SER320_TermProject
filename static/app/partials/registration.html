@@ -27,6 +27,7 @@
         <label>Password</label>
         <input type="text" id="password" class="form-control" ng-model='password' />
       </div>
+      <div class="alert alert-danger" ng-show="showExists">Email already exists</div>
 
       <button class="btn btn-primary" ng-click='submit()'>Submit</button>
     <!-- </form> -->
