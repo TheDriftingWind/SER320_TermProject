@@ -1,4 +1,4 @@
-app.factory("authSvc", ["$http", "$location", "$window", function($http, $location, $window){
+app.factory("authSvc", ["$http", "$location", "$window", "$q", function($http, $location, $window, $q){
 
   var userInfo;
 
@@ -12,6 +12,12 @@ app.factory("authSvc", ["$http", "$location", "$window", function($http, $locati
                   },
             headers: {'Content-Type':'application/json'}
           }).then(function(res){
+            userInfo = {
+              access_token: res.data.access_token,
+              id: res.data.id
+            };
+            console.log("a_token:" + res.data.access_token)
+            $window.sessionStorage["userInfo"] = JSON.stringify(userInfo);
             return res.data;
           })
   }
@@ -45,15 +51,18 @@ app.factory("authSvc", ["$http", "$location", "$window", function($http, $locati
     })
   }
 
-  // function getToken(){ //get the token for the session -- needed in the header for all HTTP methods
-  //   return userInfo
-  // }
+  function getToken(){ //get the token for the session -- needed in the header for all HTTP methods
+    var deferred = $q.defer();
+    var userInfo = $window.sessionStorage["userInfo"];
+    deferred.resolve(userInfo);
+    return deferred.promise;
+  }
 
   return {
         studentLogin: studentLogin,
         professorLogin: professorLogin,
         logout: logout,
-        // getToken: getToken
+        getToken: getToken
       };
 
 }]);

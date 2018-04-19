@@ -7,8 +7,6 @@ studentRouter.route('/')
   .get(function(req, res, next){
     students.find({}, function(err, students){
       if(err) throw err;
-      // res.header("Access-Control-Allow-Origin", "*");
-      // res.header("Access-Control-Allow-Headers", "X-Requested-With");
       res.json(students);
     });
     })
@@ -42,7 +40,7 @@ studentRouter.route('/:studentId')
       new: true
     }, function(err, student){
         if(err) throw err;
-        res.json(student._id)
+        res.json(student)
     })
   });
 

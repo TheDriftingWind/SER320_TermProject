@@ -1,12 +1,28 @@
 app.controller("studentHomeCtrl", ["studentService", "authSvc", "$scope", "$location", "$window" , function(studentService, authSvc, $scope, $location, $window){
 
-studentService.getStudentById('5ad8deee521b44437885b38c').then(function(res){
-  $scope.student = res;
-});
+$scope.userInfo = [];
 
-studentService.getStudentCourses('5ad8deee521b44437885b38c').then(function(res){
-    $scope.courses = res;
-});
+function init(){
+
+  authSvc.getToken().then(function(res){
+    //console.log(JSON.parse(res))
+    $scope.userInfo = JSON.parse(res);
+    //console.log($scope.userInfo.id)
+
+    studentService.getStudentById($scope.userInfo.id).then(function(res){
+      $scope.student = res;
+    });
+
+    studentService.getStudentCourses($scope.userInfo.id, $scope.userInfo.access_token).then(function(res){
+      $scope.courses = res;
+    });
+
+  })
+
+}
+
+init()
+
 
 
 }]);

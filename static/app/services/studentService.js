@@ -1,12 +1,13 @@
-app.factory("studentService", ["$http", "$location", function($http, $location){
+app.factory("studentService", ["authSvc", "$http", "$location", function(authSvc, $http, $location){
+
 
     function getStudentById(studentId){
-       return $http.get('http://localhost:3000/students/' + studentId).then(function(res){
+       return $http.get('http://localhost:3000/students/'+studentId).then(function(res){
          return res.data;
        });
     }
-    function getStudentCourses(studentId){
-        return $http.get('http://localhost:3000/courses/').then(function(res){
+    function getStudentCourses(studentId, token){
+        return $http.get('http://localhost:3000/courses/', {headers: {'access_token': token }} ).then(function(res){
               var studentCourses = [];
 
             if(!res){

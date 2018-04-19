@@ -131,6 +131,7 @@ function requiresAuthentication(request, response, next) {
 
     if (request.headers.access_token) { //step 1 Get access_token from header
         var token = request.headers.access_token;
+				// console.log(token)
        // console.log(tokens);
 		 if (_.where(tokens, token).length > 0) { //step 2 check access_token is in tokens array
      		console.log('Authentication : ');
