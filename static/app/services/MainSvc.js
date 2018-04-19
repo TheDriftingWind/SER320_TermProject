@@ -1,71 +1,50 @@
 app.factory("mainSvc", ["$http", "$location", function($http, $location){
 
-  // function createStudentAccount(first_name, last_name, sEmail, sPassword){
-  //   //Step 1. check if account already exists(look for if email is already used)
-  //   var result;
-  //
-  //   $http.get('http://localhost:3000/students/emailExists/' + sEmail).then(function(res){
-  //     if(!res){
-  //       //Step 2. if account doesn't exist, make the account
-  //       $http({
-  //         method: 'POST',
-  //         url: 'http://localhost:3000/students',
-  //         data: { first_name: first_name,
-  //                 last_name: last_name,
-  //                 email: sEmail,
-  //                 password: sPassword
-  //               },
-  //         headers: {'Content-Type':'application/json'}
-  //       }).then(function(res){
-  //         //send them back the response
-  //         result = res;
-  //       })
-  //     } else {
-  //       result = null;
-  //     }
-  //   }); //function end
-  //
-  //   // return result;
-  // }
-  //
-  // function createProfessorAccount(first_name, last_name, profEmail, profPassword){
-  //   var result;
-  //
-  //   //Step 1. check if professor account already exists
-  //   $http.get('http://localhost:3000/professors/emailExists/'+profEmail).then(function(res){
-  //     if(!res){
-  //       //Step 2. if account doesn't exist, make the account
-  //       $http({
-  //         method: 'POST',
-  //         url: 'http://localhost:3000/professors',
-  //         data: { first_name: first_name,
-  //                 last_name: last_name,
-  //                 email: profEmail,
-  //                 password: profPassword
-  //               },
-  //         headers: {'Content-Type':'application/json'}
-  //       }).then(function(res){
-  //         //send them back to the login page
-  //         result = res;
-  //       })
-  //     }else{
-  //       //else... show that account with email already exists
-  //       result = null;
-  //     }
-  //   });//function end
-  //
-  //   // return result;
-  // }
+  function createStudentAccount(firstname, lastname, sEmail, sPassword){
+    return $http({ //Post the new account
+            method: 'POST',
+            url: 'http://localhost:3000/students',
+            data: { first_name: firstname,
+                    last_name: lastname,
+                    email: sEmail,
+                    password: sPassword
+                  },
+            headers: {'Content-Type':'application/json'}
+          }).then(function(res){
+            return res.data;
+          })
+  }
+  function createProfessorAccount(firstname, lastname, profEmail, profPassword){
+    return $http({ //Post the new account to collection
+            method: 'POST',
+            url: 'http://localhost:3000/students',
+            data: { first_name: firstname,
+                    last_name: lastname,
+                    email: profEmail,
+                    password: profPassword
+                  },
+            headers: {'Content-Type':'application/json'}
+          }).then(function(res){
+            return res.data;
+          })
+  }
 
-    function checkEmail(email){
-      return $http.get('http://localhost:3000/students/emailExists/' + email).then(function(res){
-        return res
-      });
-    }
+  function checkStudentEmail(email){//check if an email already exists for a student account(avoid duplicates)
+    return $http.get('http://localhost:3000/students/emailExists/' + email).then(function(res){
+      return res.data
+    });
+  }
+  function checkProfessorEmail(email){//check professor email if it's already in the collection
+    return $http.get('http://localhost:3000/professor/emailExists/' + email).then(function(res){
+      return res.data
+    });
+  }
+
   return {
-          // createStudentAccount: createStudentAccount,
-          // createProfessorAccount: createProfessorAccount
-          checkEmail: checkEmail
+          createStudentAccount: createStudentAccount,
+          createProfessorAccount: createProfessorAccount,
+          checkStudentEmail: checkStudentEmail,
+          checkProfessorEmail: checkProfessorEmail
       };
 
 }]);

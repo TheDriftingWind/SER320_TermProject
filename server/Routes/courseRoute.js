@@ -22,7 +22,8 @@ courseRouter.route('/')
             throw err;
 
         //res.writeHead(200, {'Content/Type': 'text-plain'});
-        res.end('Course '+course._id+' has been created');
+        // res.end('Course '+course._id+' has been created');
+        res.json(course);
         })
   });
 
@@ -136,7 +137,7 @@ courseRouter.route('/:courseId/projects')
         // Add the new projectId
         course.projects.push(id);
         res.json(id);
-        res.end('Added project - id:' + id + " to course - id:" + req.params.courseId);
+        // res.end('Added project - id:' + id + " to course - id:" + req.params.courseId);
         course.save(function(err, course){
           if(err) throw err;
           //res.writeHead(200, {'Content-Type':'text-plain'});
@@ -189,7 +190,7 @@ courseRouter.route('/:courseId/projects/:projectId/evaluations') //gets all the 
         if(err) throw err;
         project.evaluations.push(id);
         res.json(id);
-        res.end('Added evaluation - id:' + id + " to project - id:" + req.params.projectId);
+        // res.end('Added evaluation - id:' + id + " to project - id:" + req.params.projectId);
         project.save(function(err, project){
           if(err) throw err;
           //res.writeHead(200, {'Content-Type':'text-plain'});

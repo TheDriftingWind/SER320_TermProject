@@ -13,7 +13,7 @@
         <!-- STUDENT LOGIN START -->
         <div id="student" ng-show="select==1">
           <h4>Student Login</h4>
-          <form action="student/home.html">
+          <form novalidate>
             <div class="form-group">
               <label for="username">Email</label>
               <input type="text" class="form-control" name="username"></input>
@@ -29,7 +29,7 @@
         <!-- PROFESSOR LOGIN START -->
         <div id="professor" ng-show="select==2">
           <h4>Instructor Login</h4>
-          <form action="prof/p_home.html">
+          <form novalidate>
             <div class="form-group">
               <label for="username">Email</label>
               <input type="text" class="form-control" name="username"></input>
