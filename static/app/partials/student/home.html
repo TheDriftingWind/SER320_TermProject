@@ -1,15 +1,5 @@
-<!DOCTYPE html>
-<html>
 
-<head>
-  <title>Student | Home</title>
-  <link rel="stylesheet" href="../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../css/style.css">
-  <script src="../js/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-</head>
-
-<body>
+<div class="container">
 
   <nav class="navbar navbar-default" style="width: 100%; z-index: 9999;">
     <div class="container">
@@ -23,16 +13,16 @@
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="home.html">Home</a></li>
+          <li><a href="student/{{student._id}}">Home</a></li>
           <li><a href="courselookup.html">Search Courses</a></li>
-          <li><a href="../index.html">Log Out</a></li>
+          <li><a href="logout">Log Out</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
   <div class="container">
-      <h1>Student | Home</h1>
+      <h1>Welcome {{student.first_name}} {{student.last_name}}</h1>
 
       <hr />
 
@@ -44,19 +34,16 @@
               <tr>
                 <th>Course Name</th>
                 <th>Course #</th>
-                <th>Course ID</th>
                 <th>Instructor</th>
                 <th>Term</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td><a href="course.html?course=ser225">Software Development</a></td>
-                <td>SER225</td>
-                <td>000001</td>
-                <td>Prof. Hoffman</td>
-                <td>SPRING2017</td>
-              </td>
+              <tr ng-repeat="course in courses">
+                <td><a href="student/{{student._id}}/{{course._id}}">{{course.name}}</a></td>
+                <td>{{course.course_number}}</td>
+                <td>{{course.professor.last_name}}</td>
+                <td>{{course.term}}</td>
             </tbody>
           </table>
           <div class="dropdown">
@@ -75,6 +62,4 @@
 
   </div>
 
-</body>
-
-</html>
+</div>

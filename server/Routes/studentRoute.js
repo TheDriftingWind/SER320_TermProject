@@ -25,11 +25,11 @@ studentRouter.route('/')
 
 studentRouter.route('/:studentId')
   .get(function(req, res, next){
-    students.findById(req.params.studentId, function(err, course){
+    students.findById(req.params.studentId, function(err, student){
         if(err)
             throw err;
 
-        res.json(course);
+        res.json(student);
     });
   })
   .put(function(req,res, next){

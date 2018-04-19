@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var evaluationSchema = new Schema({
     evaluator: { type: Schema.Types.ObjectId, ref: 'student'},
     evaluatee: { type: Schema.Types.ObjectId, ref: 'student'},
-    //status: { type: Boolean },
+    status: { type: Boolean },
     feedback: {type: String },
     collaboration: {
       type: Number,

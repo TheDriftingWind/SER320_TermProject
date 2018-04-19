@@ -10,6 +10,10 @@ app.config(function($routeProvider){
     controller: "RegisterCtrl",
     templateUrl: "app/partials/registration.html"
   })
+    .when("/student/:studentId",{
+      controller: "studentHomeCtrl",
+      templateUrl: "app/partials/student/home.html"
+  })
   .otherwise({
     
   });
