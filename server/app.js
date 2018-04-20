@@ -4,6 +4,7 @@ var jwt = require('jwt-simple');// 4/22 add jwt and _
 var _ = require('underscore');
 //var async = require("async");
 var path = require('path');
+var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
@@ -32,7 +33,7 @@ app.set('jwtTokenSecret', '123456ABCDEF'); //token authentication
 var tokens = [];
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+// app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // app.use(function(req, res, next) { // Allow CORS
@@ -48,8 +49,9 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
 
+app.use(express.static(__dirname + "/../static"));
 
 app.post('/api/professorLogin', function(req, res, next){ //authenticates the professor if login is correct
 	professors.findOne({email:req.body.email, password: req.body.password}, function(err, professor){

@@ -1,6 +1,6 @@
 <div class="container">
   <fieldset>
-    <!-- <form novalidate> -->
+    <form name="myForm" novalidate ng-submit='submit()'>
 
       <div class="form-group">
         <label>Account Type</label>
@@ -25,11 +25,12 @@
       </div>
       <div class="form-group">
         <label>Password</label>
-        <input type="text" id="password" class="form-control" ng-model='password' />
+        <input type="text" id="password" name="password" class="form-control" ng-model='password' ng-maxlength="20" ng-minlength="5" />
+        <div >Cannot leave field empty</div>
       </div>
       <div class="alert alert-danger" ng-show="showExists">Email already exists</div>
 
-      <button class="btn btn-primary" ng-click='submit()'>Submit</button>
-    <!-- </form> -->
+      <input type="submit" class="btn btn-primary" value="Submit" />
+    </form>
   </fieldset>
 </div>
