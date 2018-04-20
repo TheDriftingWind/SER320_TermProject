@@ -4,33 +4,37 @@
 
       <div class="form-group">
         <label>Account Type</label>
-        <select class="form-control" ng-model='type'>
+        <select class="form-control" name="type" ng-model='type'>
           <option value="" selected="" disabled="" hidden="">--SELECT--</option>
           <option value="Student">Student</option>
           <option value="Professor">Professor</option>
         </select>
+        <div class="alert alert-danger" ng-show="myForm.type.$touched && type == '' ">Please select an account type</div>
       </div>
 
       <div class="form-group">
         <label>First Name</label>
-        <input type="text" id="fname" class="form-control" ng-model='f_name' />
+        <input type="text" id="fname" name="fname" class="form-control" ng-model='f_name' />
+        <div class="alert alert-danger" ng-show="myForm.fname.$touched && f_name == '' ">Please enter your firstname</div>
       </div>
       <div class="form-group">
         <label>Last Name</label>
-        <input type="text" class="form-control" ng-model='l_name' />
+        <input type="text"  name="lname" class="form-control" ng-model='l_name' />
+        <div class="alert alert-danger" ng-show="myForm.lname.$touched && l_name == '' ">Please enter your lastname</div>
       <div class="form-group">
         <label>Email</label>
-        <input type="text" id="email" class="form-control" ng-model='email' />
+        <input type="email" id="email" name="email" class="form-control" ng-model='email' />
+        <div class="alert alert-danger" ng-show="myForm.email.$touched && (myForm.email.$invalid || email == '')">Please enters a valid email</div>
       </div>
       </div>
       <div class="form-group">
         <label>Password</label>
         <input type="text" id="password" name="password" class="form-control" ng-model='password' ng-maxlength="20" ng-minlength="5" />
-        <div >Cannot leave field empty</div>
+        <div class="alert alert-danger" ng-show="myForm.password.$touched && (myForm.password.$invalid || password == '')">Password must be between 5 and 20 characters long</div>
       </div>
       <div class="alert alert-danger" ng-show="showExists">Email already exists</div>
 
-      <input type="submit" class="btn btn-primary" value="Submit" />
+      <input type="submit" class="btn btn-primary" value="Submit" ng-disabled="email == '' || password == '' || f_name == '' || l_name == '' || type == ''"/>
     </form>
   </fieldset>
 </div>

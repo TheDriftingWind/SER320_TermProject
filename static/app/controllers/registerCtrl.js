@@ -6,6 +6,7 @@ app.controller("RegisterCtrl", ["mainSvc", "$scope", "$location", "$window" , fu
   $scope.l_name = '';
   $scope.email = '';
   $scope.password = '';
+  $scope.type = ''
 
   function submit(){
     console.log($scope.type);

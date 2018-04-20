@@ -1,20 +1,20 @@
 var createError = require('http-errors');
 var express = require('express');
-var jwt = require('jwt-simple');// 4/22 add jwt and _
-var _ = require('underscore');
-//var async = require("async");
-var path = require('path');
+var jwt = require('jwt-simple');//authentication
+var _ = require('underscore');// directory
+var path = require('path'); //join paths
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+//allow CORS to use for firefox
 var cors = require('cors');
 
 var courseRoute = require('./routes/courseRoute');
 var studentRoute = require('./routes/studentRoute');
 var professorRoute = require('./routes/professorRoute');
 
-//models for login
+//models for login authentication
 var students = require('./models/student');
 var professors = require('./models/professor');
 
@@ -34,17 +34,11 @@ var tokens = [];
 
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+// app.set('view engine', 'jade');
 
-// app.use(function(req, res, next) { // Allow CORS
-// 	res.header("Access-Control-Allow-Origin", "*");
-// 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, access_token");
-// 	res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-// 	res.header("Access-Control-Allow-Credentials", "true");
-// 	res.header('Content-Type', 'application/json');
-// 	next();
-// });
+//enable cors so the app can work in chrome
 app.use(cors({origin: '*'}));
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
