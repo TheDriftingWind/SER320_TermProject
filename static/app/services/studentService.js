@@ -1,4 +1,4 @@
-app.factory("studentService", ["authSvc", "$http", "$location", function(authSvc, $http, $location){
+app.factory("studentService", ["$http", "$location", function($http, $location){
 
 
     function getStudentById(studentId){

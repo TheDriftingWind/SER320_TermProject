@@ -65,7 +65,7 @@ app.post('/api/professorLogin', function(req, res, next){ //authenticates the pr
 
 					tokens.push(token); //add token to tokens array
 
-					res.json({ 'access_token': token, 'id': professor._id });//send token to user
+					res.json({ 'access_token': token, 'id': professor._id, 'account': 'prof'});//send token to user
 			}
 	});
 //	next()
@@ -88,7 +88,7 @@ app.post('/api/studentLogin', function(req, res, next){//authenticates the profe
 
       tokens.push(token); //add token to the tokens collection
 
-      res.json({ 'access_token': token, 'id': student._id }); //give user the token
+      res.json({ 'access_token': token, 'id': student._id, 'account': 'student' }); //give user the token
 		}
 	});
 //	next()

@@ -3,8 +3,8 @@ app.factory("mainSvc", ["$http", "$location", function($http, $location){
   function createStudentAccount(firstname, lastname, sEmail, sPassword){
     return $http({ //Post the new account
             method: 'POST',
-            url: 'http://localhost:3000/students',
-            data: { first_name: firstname,
+            url: 'http://localhost:3000/students', //send POST to student router
+            data: { first_name: firstname, //put the information from enter in form from $scope
                     last_name: lastname,
                     email: sEmail,
                     password: sPassword
@@ -16,8 +16,8 @@ app.factory("mainSvc", ["$http", "$location", function($http, $location){
   }
   function createProfessorAccount(firstname, lastname, profEmail, profPassword){
     return $http({ //Post the new account to collection
-            method: 'POST',
-            url: 'http://localhost:3000/students',
+            method: 'POST', //send POST to professor with form data to make new prof account
+            url: 'http://localhost:3000/professors',
             data: { first_name: firstname,
                     last_name: lastname,
                     email: profEmail,
@@ -35,7 +35,7 @@ app.factory("mainSvc", ["$http", "$location", function($http, $location){
     });
   }
   function checkProfessorEmail(email){//check professor email if it's already in the collection
-    return $http.get('http://localhost:3000/professor/emailExists/' + email).then(function(res){
+    return $http.get('http://localhost:3000/professors/emailExists/' + email).then(function(res){
       return res.data
     });
   }

@@ -27,6 +27,14 @@ courseRouter.route('/')
         })
   });
 
+courseRouter.route('/professor/:profId')//return only the courses that a professor owns
+  .get(function(req, res, next){
+    courses.find({professor : req.params.profId}, function(err, courses){
+      if(err) throw err;
+      res.json(courses)
+    })
+  })
+
 courseRouter.route('/:courseId')
   .get(function(req, res, next){
     courses.findById(req.params.courseId, function(err, course){

@@ -17,7 +17,7 @@ app.controller("LoginCtrl", ["authSvc", "$scope", "$http", "$window","$location"
   function professorLogin(){
     authSvc.professorLogin($scope.profEmail, $scope.profPassword).then(function(res){
         if(res.access_token){ //if service respond with token, login succeeded
-          $location.path('/student/')
+          $location.path('/professor/')
         } else { //else login failed
           $window.alert('Invalid Password or Email')
         }

@@ -30,7 +30,7 @@ app.controller("RegisterCtrl", ["mainSvc", "$scope", "$location", "$window" , fu
     } else if($scope.type == 'Professor') {
       //Account type is professor
       mainSvc.checkProfessorEmail($scope.email).then(function(res){
-        if(!res || res.length() == 0){
+        if(!res || res.length == 0){
           //if the return is empty no email was found -- OK to make the new account
           mainSvc.createProfessorAccount($scope.f_name, $scope.l_name, $scope.email, $scope.password).then(function(res){
             $location.path('/') //redirect to login page

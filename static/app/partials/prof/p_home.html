@@ -1,72 +1,50 @@
-<!DOCTYPE html>
-<html>
+<div class="container">
+    <h1>Professor | Home  Welcome Prof. {{$scope.professor.f_name}} {{$scope.professor.l_name}}</h1>
+    <hr />
 
-<head>
-  <title>Professor | Home</title>
-  <link rel="stylesheet" href="../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../css/style.css">
-  <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-</head>
+    <div class="row">
 
-<body>
-
-
-  <div class="container">
-      <h1>Professor | Home</h1>
-      <hr />
-
-      <div class="row">
-
-        <div class="col-sm-3 boxed">
-          <h3>Utilities</h3>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><a href="" class="btn btn-primary">Create New Course</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="col-sm-8 boxed">
-          <h3>Courses</h3>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Course Name</th>
-                <th>Course Number</th>
-                <th>Course ID</th>
-                <th>Term</th>
-                <th>Status</th>
-                <th></th>
-              </tr>
+      <div class="col-sm-3 boxed">
+        <h3>Utilities</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Action</th>
+            </tr>
           </thead>
-
           <tbody>
             <tr>
-              <td>SER225</td>
-              <td>SER225</td>
-              <td>101101</td>
-              <td>SPRING2017</td>
-              <td>Active</td>
-              <td><a href="p_course.html" class="btn btn-primary">View</a></td>
+              <td><a href="#/professor/createCourse" class="btn btn-primary">Create New Course</a></td>
             </tr>
           </tbody>
+        </table>
+      </div>
 
-          </table>
-        </div>
+      <div class="col-sm-8 boxed">
+        <h3>Courses</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Course Name</th>
+              <th>Course Number</th>
+              <th>Term</th>
+              <th><!--Button--></th>
+            </tr>
+        </thead>
 
+        <tbody>
+          <tr ng-repeat='course in courses'>
+            <td>{{course.name}}</td>
+            <td>{{course.course_number}}</td>
+            <td>{{course.term}}</td>
+            <td><a href="/professor/course/{{course._id}}" class="btn btn-primary">View</a></td>
+          </tr>
+        </tbody>
 
-    </div>
+        </table>
+      </div>
+
 
   </div>
 
-</body>
-
-</html>
+</div>
