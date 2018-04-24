@@ -17,11 +17,10 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">PEWA</a>
+        <a class="navbar-brand" href="#/student">PEWA</a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="home.html">Home</a></li>
           <li><a href="courselookup.html">Search Courses</a></li>
           <li><a href="../index.html">Log Out</a></li>
         </ul>
@@ -37,8 +36,8 @@
 
   <div class="container boxed">
     <h3>Details</h3>
-    <h4><b>Course Name:</b> Software Developement</h4>
-    <p><b>Course #:</b> SER225</p>
+    <h4><b>Course Name:</b>{{course.name}}</h4>
+    <p><b>Course #:</b> {{course.course_number}}</p>
   </div>
 
   <div class="container boxed mt10">
@@ -46,7 +45,6 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th>Project ID</th>
           <th>Project Name</th>
           <th>Start Date</th>
           <th>End Date</th>
@@ -54,19 +52,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>Scrum Cycle Week 1</td>
-          <td>11/1/2017</td>
-          <td>11/14/2017</td>
-          <td><a href="project.html" class="btn btn-primary">View</a></td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Scrum Cycle Week 2</td>
-          <td>11/16/2017</td>
-          <td>11/30/2017</td>
-          <td><a href="project.html" class="btn btn-primary">View</a></td>
+        <tr ng-repeat="project in projects">
+          <td>{{project.name}}</td>
+          <td>{{project.startDate}}</td>
+          <td>{{project.endDate}}</td>
+          <td><a href="#/student/course/{{course._id}}/project/{{project._id}}" class="btn btn-primary">View</a></td>
         </tr>
       </tbody>
     </table>

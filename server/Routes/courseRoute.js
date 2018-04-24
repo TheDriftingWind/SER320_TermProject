@@ -51,6 +51,7 @@ courseRouter.route('/:courseId')
     })
   });
 
+
 courseRouter.route('/:courseId/teams') //add new teams and get all teams
   .get(function(req, res, next){
     teams.find({}, function(err, teams){
@@ -67,8 +68,17 @@ courseRouter.route('/:courseId/teams') //add new teams and get all teams
   courseRouter.route('/:courseId/teams/:teamId')
   .get(function(req, res, next){
     teams.findById(req.params.teamId, function(err, team){
-      if(err) throw err
-      res.json(team);
+      if(err) throw err;
+      students.find()
+       .where('_id')
+       .in(team.students)
+       .exec(function(err, result){
+          if (err) throw err;
+          var completeTeam = team;
+          completeTeam.students = result;
+          console.log(result);
+          res.json(completeTeam); //returns projects with ids in course.projects
+      })
     })
   })
   .put(function(req, res, next){
@@ -127,11 +137,19 @@ courseRouter.route('/:courseId/students/:studentId')
 
 courseRouter.route('/:courseId/projects')
   .get(function(req, res, next){
+    //Finds the specific course by ID
     courses.findById(req.params.courseId, function(err, course){
       if(err) throw err;
-      res.json(course.projects)
-    })
+        //takes an array of values and searches the projects collection for objects that match those values for a specific attribute
+       projects.find()
+        .where('_id')
+        .in(course.projects)
+        .exec(function(err, result){
+           if (err) throw err;
+           res.json(result); //returns projects with ids in course.projects
+       })
   })
+})
   .post(function(req, res, next){
     //Step 1 - Make the project in project collection
     projects.create(req.body, function(err, project){

@@ -18,6 +18,15 @@ app.config(function($routeProvider){
     controller: "professorHomeCtrl",
     templateUrl: "app/partials/prof/p_home.html"
   })
+    .when("/student/course/:courseId", {
+      controller: "studentCourseCtrl",
+      templateUrl: "app/partials/student/course.html"
+  })
+    .when("/student/course/:courseId/project/:projectId",
+         {
+      controller: "studentProjectCtrl",
+      templateUrl: "app/partials/student/project.html"
+  })
   // .when("professor/createCourse", {
   //   controller: "createCourseCtrl",
   //   templateUrl: "app/partials/prof/"

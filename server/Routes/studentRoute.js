@@ -21,7 +21,17 @@ studentRouter.route('/')
 
   });
 
+studentRouter.route('/group')
+  .post(function(req, res, next){
 
+    students.find()
+     .where('_id')
+     .in(req.body.students)
+     .exec(function(err, result){
+        if (err) throw err;
+        res.json(result); //returns projects with ids in course.projects
+    })
+  })
 studentRouter.route('/:studentId')
   .get(function(req, res, next){
     students.findById(req.params.studentId, function(err, student){

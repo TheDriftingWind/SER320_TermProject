@@ -16,38 +16,85 @@ app.factory("studentService", ["$http", "$location", function($http, $location){
 
             else{
 
-                for (var course in res.data[0]){
-                    var result = course.students.filter(function(student){
-                        return student._id == studentId;
-                    });
+                for (var index in res.data){
+                    course = res.data[index];
+                    var existingIndex = course.students.indexOf(studentId);
 
-                    if(result.length > 0){
+                    if(existingIndex>-1){
                         studentCourses.push(course);
                     }
+
                 }
             }
             return studentCourses;
         });
     }
 
-    function getCourseById(courseId){
-         return $http.get('http://localhost:3000/courses/'+courseId);
+    function getCourseById(courseId, token){
+         return $http.get('http://localhost:3000/courses/'+courseId, {headers: {'access_token': token }}).then(function(res){
+             return res.data;
+             });
+
     }
 
-    function getProjects(courseId){
-         return $http.get('http://localhost:3000/courses/'+courseId+'/projects/');
+    function getProjects(courseId, token){
+         return $http.get('http://localhost:3000/courses/'+courseId+'/projects/', {headers: {'access_token': token }}).then(function(res){
+           return res.data;
+         });
     }
 
-    function getProjectById(courseId, projectId){
-         return $http.get('http://localhost:3000/courses/'+courseId+'/projects/'+projectId);
+    function getProjectById(courseId, projectId, token){
+         return $http.get('http://localhost:3000/courses/'+courseId+'/projects/'+projectId, {headers: {'access_token': token }}).then(function(res){
+           return res.data;
+         });
     }
 
-    function getTeamById(courseId, teamId){
-         return $http.get('http://localhost:3000/courses/'+courseId+'/teams/'+teamId);
+    function getStudentGroup(studentIds){
+        return $http({ //Post the new account
+                method: 'POST',
+                url: 'http://localhost:3000/students/group',
+                data: {
+                        students: studentIds
+                      },
+                headers: {'Content-Type':'application/json'}
+              }).then(function(res){
+                return res.data;
+              })
+    }
+
+    function getStudentTeam(courseId, studentId, token){
+      return $http.get('http://localhost:3000/courses/'+courseId+'/teams', {headers: {'access_token': token }} ).then(function(res){
+            var studentTeam;
+
+          if(!res){
+             //error in code
+
+          }
+
+          else{
+            console.log(res.data);
+              for (var index in res.data){
+                  team = res.data[index];
+                  var existingIndex = team.students.indexOf(studentId);
+
+                  if(existingIndex>-1){
+                      studentTeam=team;
+                      console.log(team);
+                  }
+
+              }
+          }
+          return studentTeam;
+      });
+    }
+    function getTeamById(courseId, teamId, token){
+         return $http.get('http://localhost:3000/courses/'+courseId+'/teams/'+teamId, {headers: {'access_token': token }}).then(function(res){
+           return res.data;
+         });
     }
 
 
-    function fillEvaluation(courseId, projectId, evaluator_id, evaluatee_id, f_feedback, f_collaboration, f_contribution, f_responsive, f_status){
+    function fillEvaluation(courseId, projectId, evaluator_id, evaluatee_id, f_feedback, f_collaboration, f_contribution, f_responsive, f_status, token){
          return $http({
            method: 'POST',
           url: 'http://localhost:3000/courses'+courseId+'/projects/'+projectId+'/evaluations',
@@ -59,12 +106,12 @@ app.factory("studentService", ["$http", "$location", function($http, $location){
                  responsive: f_responsive,
                  status: f_status
                  },
-           headers: {'Content-Type':'application/json'}
+           headers: {'Content-Type':'application/json', 'access_token': token}
          })
        }
 
 
-    function continueEvaluation(evaluationId, f_feedback, f_collaboration, f_contribution, f_responsive, f_status){
+    function continueEvaluation(evaluationId, f_feedback, f_collaboration, f_contribution, f_responsive, f_status, token){
          return $http({
            method: 'PUT',
           url: 'http://localhost:3000/courses/'+courseId+'/projects/'+projectId+'/evaluations/'+evaluationId,
@@ -74,12 +121,12 @@ app.factory("studentService", ["$http", "$location", function($http, $location){
                  responsive: f_responsive,
                  status: f_status
                  },
-           headers: {'Content-Type':'application/json'}
+           headers: {'Content-Type':'application/json', 'access_token': token}
          })
     }
 
-    function viewEvaluations(courseId, projectId, studentId){
-         $http.get('http://localhost:3000/courses/'+courseId+'/projects/'+projectId+'/evaluations').then(function(res){
+    function viewEvaluations(courseId, projectId, studentId, token){
+         $http.get('http://localhost:3000/courses/'+courseId+'/projects/'+projectId+'/evaluations', {headers: {'access_token': token }}).then(function(res){
               var studentEvaluations = [];
 
             if(!res){
@@ -103,6 +150,8 @@ app.factory("studentService", ["$http", "$location", function($http, $location){
         getCourseById: getCourseById,
         getProjects: getProjects,
         getProjectById: getProjectById,
+        getStudentTeam: getStudentTeam,
+        getStudentGroup: getStudentGroup,
         getTeamById: getTeamById,
         fillEvaluation: fillEvaluation,
         continueEvaluation: continueEvaluation,

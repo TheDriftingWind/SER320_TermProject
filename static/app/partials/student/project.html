@@ -16,11 +16,10 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">PEWA</a>
+        <a class="navbar-brand" href="#/student">PEWA</a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="home.html">Home</a></li>
           <li><a href="courselookup.html">Search Courses</a></li>
           <li><a href="../index.html">Log Out</a></li>
         </ul>
@@ -31,11 +30,14 @@
   <div class="container">
     <header>
       <h1>Project</h1>
+
     </header>
   </div>
 
   <div class="container boxed mt10">
-    <h3>Team Name: Team A1</h3>
+      <h3>Details</h3>
+    <h4><b>Project Name:</b>{{project.name}}</h4>
+      <h4><b>Team Name:</b> {{team.teamName}}</h4>
     <hr>
     <h4>Roster</h4>
     <table class="table table-bordered">
@@ -46,29 +48,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Charles</td>
-          <td>Zhu</td>
-        </tr>
-        <tr>
-          <td>Carly</td>
-          <td>Emile</td>
-        </tr>
-        <tr>
-          <td>Larry</td>
-          <td>Fine</td>
-        </tr>
-        <tr>
-          <td>Moe</td>
-          <td>Howard</td>
-        </tr>
-        <tr>
-          <td>Curly</td>
-          <td>Howard</td>
+        <tr ng-repeat="student in roster">
+          <td>{{student.first_name}}</td>
+          <td>{{student.last_name}}</td>
         </tr>
       </tbody>
     </table>
-    <a href="session.html" class="btn btn-primary pull-right mb10" >View Evaluations</a>
+    <a href="student/course/{{course._id}}/projects/{{project._id}}/evaluations" class="btn btn-primary pull-right mb10" >View Evaluations</a>
   </div>
 
 </body>
