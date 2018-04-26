@@ -29,11 +29,68 @@ app.factory("profSvc", ["authSvc", "$http", "$location", function(authSvc, $http
       })
     }
 
+    function getCourseById(id, token){
+      return $http.get('http://localhost:3000/courses/'+id, {headers:{'access_token': token}}).then(function(res){
+        return res.data;
+      })
+    }
 
+    function getProjectsForCourse(courseId, token){
+      return $http.get('http://localhost:3000/courses/'+courseId+'/projects', {headers:{'access_token': token}}).then(function(res){
+        return res.data;
+      })
+    }
+
+    function createProject(courseId, body, token){
+      return $http({
+        method: "POST",
+        url: 'http://localhost:3000/courses/'+courseId+'/projects',
+        data: {
+          name: body.name,
+          description: body.description,
+          startDate: body.startDate,
+          endDate: body.endDate
+        },
+        headers: {'access_token': token}
+      }).then(function(res){
+        return res.data;
+      })
+    }
+
+    function getAllStudents(){
+      return $http.get('http://localhost:3000/students/').then(function(res){
+        return res.data;
+      })
+    }
+
+    function addStudentToCourse(studentId, courseId, token){
+      return $http({
+        method: "POST",
+        url: 'http://localhost:3000/courses/'+courseId+'/students',
+        data: {
+          studentId: studentId
+        },
+        headers: {'access_token': token}
+      }).then(function(res){
+        return res.data;
+      })
+    }
+
+    function getCourseStudents(courseId, token){
+      return $http.get('http://localhost:3000/courses/'+courseId+'/students', {headers:{'access_token': token}}).then(function(res){
+        return res.data;
+      })
+    }
 
     return {
       getProfessorCourses: getProfessorCourses,
       getProfessorById: getProfessorById,
-      createNewCourse: createNewCourse
+      createNewCourse: createNewCourse,
+      getCourseById: getCourseById,
+      getProjectsForCourse: getProjectsForCourse,
+      createProject: createProject,
+      getAllStudents: getAllStudents,
+      addStudentToCourse: addStudentToCourse,
+      getCourseStudents: getCourseStudents
     }
 }]);

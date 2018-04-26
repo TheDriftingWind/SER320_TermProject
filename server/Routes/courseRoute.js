@@ -51,6 +51,19 @@ courseRouter.route('/:courseId')
     })
   });
 
+// courseRouter.route('/:courseId/projects')
+//   .get(functioN(req, res, next){
+//     courses.findById(req.param.courseId, function(err, course){
+//       if(err) throw err;
+//       projects.find({
+//         '_id': {$in: course.projects}
+//       }, function(err, projects){
+//         res.json(projects);
+//       })
+//     })
+//   })
+//
+//   courseRouter.route('/:course/')
 
 courseRouter.route('/:courseId/teams') //add new teams and get all teams
   .get(function(req, res, next){
@@ -93,11 +106,17 @@ courseRouter.route('/:courseId/teams') //add new teams and get all teams
       });
     })
 
-courseRouter.route('/:courseId/students')
+courseRouter.route('/:courseId/students')//get all the students registered for a specific course
   .get(function(req, res, next){
-    courses.findById(req.params.courseId, function(err, course){
-        if(err) throw err;
-        res.json(course.students);
+    courses.findById(req.params.courseId, function(err, course){ //Step 1. find the course by ID
+        if(err) throw err; //Step 2. get the collection of student IDs
+        students.find() //Step 3. Query the students collection
+        .where('_id') //Get all students where _id matches with collection found in course object
+        .in(course.students)
+        .exec(function(err, students){
+          if(err) throw err
+          res.json(students) //Step 4. return the matches
+        })
     })
   })
 .post(function(req, res, next){ //only add students
@@ -147,9 +166,9 @@ courseRouter.route('/:courseId/projects')
         .exec(function(err, result){
            if (err) throw err;
            res.json(result); //returns projects with ids in course.projects
-       })
-  })
-})
+        })
+      })
+    })
   .post(function(req, res, next){
     //Step 1 - Make the project in project collection
     projects.create(req.body, function(err, project){

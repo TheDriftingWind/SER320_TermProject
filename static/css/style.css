@@ -25,3 +25,7 @@
 .pt10{
   padding-top: 10px;
 }
+.center{
+  margin:auto;
+  width: 50%
+}
