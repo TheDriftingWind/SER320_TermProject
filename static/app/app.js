@@ -40,11 +40,15 @@ app.config(function($routeProvider){
     controller: "professorAddStudentCtrl",
     templateUrl: "app/partials/prof/p_student_lookup.html"
   })
+  .when('/professor/course/:courseId/teamForm',{
+    controller: "professorTeamFormCtrl",
+    templateUrl: "app/partials/prof/p_team_form.html"
+  })
   // .when("professor/createCourse", {
   //   controller: "createCourseCtrl",
   //   templateUrl: "app/partials/prof/"
   // })
   .when('/', {redirectTo: "/login"})
-  .otherwise({redirectTo: "/login"});
+  //.otherwise({redirectTo: "/login"});
 
 })

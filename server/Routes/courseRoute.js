@@ -67,7 +67,7 @@ courseRouter.route('/:courseId')
 
 courseRouter.route('/:courseId/teams') //add new teams and get all teams
   .get(function(req, res, next){
-    teams.find({}, function(err, teams){
+    teams.find({course: req.params.courseId}, function(err, teams){
       if(err) throw err
       res.json(teams);
     });

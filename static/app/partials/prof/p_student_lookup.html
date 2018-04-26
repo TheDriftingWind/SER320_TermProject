@@ -22,7 +22,7 @@
             <td>{{student.first_name}}</td>
             <td>{{student.last_name}}</td>
             <td>{{student.email}}</td>
-            <td><button class="btn btn-success" ng-click="addStudentToCourse(student._id)">Add to Course</button>
+            <td><button class="btn btn-success" ng-click="addStudentToCourse(student._id)" ng-disabled="existingIds.indexOf(student._id) != -1">Add to Course</button>
           </tr>
         </tbody>
       </table>

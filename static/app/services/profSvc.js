@@ -82,6 +82,27 @@ app.factory("profSvc", ["authSvc", "$http", "$location", function(authSvc, $http
       })
     }
 
+    function createTeam(courseId, body, token){
+      return $http({
+        method: "POST",
+        url: 'http://localhost:3000/courses/'+courseId+'/teams',
+        data: {
+          teamName: body.name,
+          students: body.selected,
+          course: courseId
+        },
+        headers: {'access_token': token}
+      }).then(function(res){
+        return res.data;
+      })
+    }
+
+    function getCourseTeams(courseId, token){
+      return $http.get('http://localhost:3000/courses/'+courseId+'/teams', {headers:{'access_token': token}}).then(function(res){
+        return res.data;
+      })
+    }
+
     return {
       getProfessorCourses: getProfessorCourses,
       getProfessorById: getProfessorById,
@@ -91,6 +112,8 @@ app.factory("profSvc", ["authSvc", "$http", "$location", function(authSvc, $http
       createProject: createProject,
       getAllStudents: getAllStudents,
       addStudentToCourse: addStudentToCourse,
-      getCourseStudents: getCourseStudents
+      getCourseStudents: getCourseStudents,
+      createTeam: createTeam,
+      getCourseTeams: getCourseTeams
     }
 }]);
