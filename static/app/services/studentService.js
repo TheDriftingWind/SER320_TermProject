@@ -72,7 +72,6 @@ app.factory("studentService", ["$http", "$location", function($http, $location){
           }
 
           else{
-            console.log(res.data);
               for (var index in res.data){
                   team = res.data[index];
                   var existingIndex = team.students.indexOf(studentId);
