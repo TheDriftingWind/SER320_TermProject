@@ -1,102 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Course Form</title>
-  <link rel="stylesheet" type="text/css" href="../css/style.css" />
-  <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
-  <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="../js/functions.js"></script>
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-</head>
+<div class="container center">
+ <header>
+   <h1>Course Form<span id="addUpdate"></span></h1>
+ </header>
+</div>
+<div class="container boxed pb10 pt10 center">
+  <form>
+    <label>Course Name</label>
+    <input type="text" class="form-control" name="name" id="name" ng-model="data.name"></input>
 
-<body>
-  <nav class="navbar navbar-default" style="width: 100%; z-index: 9999;">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">PEWA</a>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="p_home.html">Home</a></li>
-          <li><a href="p_studentlookup.html">Search Student</a></li>
-          <li><a href="../index.html">Log Out</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+    <label>Course Number</label>
+    <input type="text" class="form-control" name="number" id="number" ng-model="data.course_number"></input>
 
-  <div class="container">
-   <header>
-     <h1>Course Form - <span id="addUpdate"></span></h1>
-     <script type="text/javascript">
-       var course = getUrlParameter('course');
-       if(course)
-         document.getElementById('addUpdate').innerHTML = 'Update';
-       else
-         document.getElementById('addUpdate').innerHTML = 'Add';
-     </script>
-   </header>
-  </div>
-  <div class="container boxed pb10 pt10">
-    <form>
-      <label>Course Name</label>
-      <input type="text" class="form-control" name="name" id="name" required></input>
-      <script type="text/javascript">
-        var course = getUrlParameter('course');
-        if(course)
-          document.getElementById('name').setAttribute('value', course  )
-      </script>
-      <label>Course Number</label>
-      <input type="text" class="form-control" name="number" id="number" required></input>
-      <script type="text/javascript">
-        var number = getUrlParameter('number');
-        if(number)
-          document.getElementById('number').setAttribute('value', number)
-      </script>
-      <label>Term</label>
-      <select class="form-control" required>
-        <option hidden disabled selected value="" id="term">--SELECT--</option>
-        <option value="SPRING2017">SPRING2017</option>
-        <option value="FALL2017">FALL2017</option>
-        <option value="SPRING2018">SPRING2018</option>
-        <option value="FALL2018">FALL2018</option>
-      </select>
-      <script type="text/javascript">
-        var term = getUrlParameter('term');
-        if(term){
-          document.getElementById('term').setAttribute('value', term);
-          document.getElementById('term').innerHTML = term;
-        }
-      </script>
-      <label>Add Students</label>
-      <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          Add Students
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-          <li><a href="p_studentlookup_add.html?addTo=001">Search Students</a></li>
-          <li>
-            <label>Upload Roster</label>
-            <form>
-              <input type="file" name="file" id="file"/>
-            </form>
-          </li>
-        </ul>
-      </div>
+    <label>Term</label>
+    <input type="text" class="form-control" name="term" id="term" ng-model="data.term"></input>
 
-      <input type="submit" value="Submit" class="btn btn-primary mt10" />
-    </form>
-
-  </div>
-
-</body>
-
-</html>
+    <button class="btn btn-primary mt10" ng-click="createCourse()">Submit</button>
+  </form>
+</div>

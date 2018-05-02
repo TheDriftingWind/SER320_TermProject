@@ -1,81 +1,38 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>My Projects</title>
-    <link rel="stylesheet" type="text/css" href="../css/style.css" />
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
-    <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../js/functions.js"></script>
-
-    </script>
-</head>
-
-<body>
-  <nav class="navbar navbar-default" style="width: 100%; z-index: 9999;">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">PEWA</a>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="home.html">Home</a></li>
-          <li><a href="courselookup.html">Search Courses</a></li>
-          <li><a href="../index.html">Log Out</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
   <div class="container">
     <header>
-      <h1>Project - <span id="project_name"></span></h1>
-      <script type="text/javascript">
-        var title = getUrlParameter('title');
-        console.log(title);
-        document.getElementById('project_name').innerHTML = title;
-      </script>
+      <h1>Project - {{projectInfo.name}}<span id="project_name"></span></h1>
     </header>
   </div>
 
-  <div class="container boxed mt10">
+  <div class="container boxed mt10 pb10">
     <h3>Actions</h3>
-    <div class="d-inline">
-      <a href="p_team_form.html" class="btn btn-primary mb10">Create Team</a>
-    </div>
+    <a href="#/professor/course/{{courseId}}/project/{{projectId}}/createEvaluation" class="btn btn-primary">Create New Evaluations</a>
   </div>
 
   <div class="container boxed mt10">
-    <h3>Teams</h3>
+    <h3>Evaluations</h3>
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th>Team Name</th>
-          <th>Number of Members</th>
+          <th>Evaluation Name</th>
+          <th>Evaluator</th>
+          <th>Evaluatee</th>
+          <th>Start Date</th>
+          <th>Due Date</th>
+          <th>Status</th>
           <th><!--btn placeholder--></th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Team A1</td>
-          <td>5</td>
+        <tr ng-repeat="evaluation in evaluations">
+          <td>{{evaluation.name}}</td>
+          <td>{{evaluation.evaluator}}</td>
+          <td>{{evaluation.evaluatee}}</td>
+          <td>{{evaluation.startDate}}</td>
+          <td>{{evaluation.endDate}}</td>
+          <td>{{evaluation.status}}</td>
           <td>
-            <a href="p_team.html?team=A1" class="btn btn-primary">View Team</a>
-            <a href="p_team_form.html?team=A1" class="btn btn-primary">Edit Team</a>
-          </td>
-        </tr>
-        <tr>
-          <td>Team A2</td>
-          <td>5</td>
-          <td>
-            <a href="p_team.html?team=A2" class="btn btn-primary">View Team</a>
-            <a href="p_team_form.html?team=A2" class="btn btn-primary">Edit Team</a>
+            <a href="" class="btn btn-primary">View</a>
           </td>
         </tr>
       </tbody>
