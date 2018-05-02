@@ -1,0 +1,20 @@
+  <div class="container">
+   <header>
+     <h1>Session Form<span id="addUpdate"></span></h1>
+   </header>
+  </div>
+  <div class="container boxed pb10 pt10">
+    <form>
+      <label>Session Name</label>
+      <input type="text" class="form-control" name="project" id="projectName" ng-model="data.name"></input>
+
+      <label>Start Date</label>
+      <input type="date" class="form-control" name="project" id="startDate" ng-model="data.startDate"></input>
+
+      <label>End Date</label>
+      <input type="date" class="form-control" name="project" id="endDate" ng-model="data.endDate"></input>
+
+      <button class="btn btn-primary mt10" ng-click="submit()">Submit</button>
+
+    </form>
+  </div>

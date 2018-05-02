@@ -234,24 +234,49 @@ courseRouter.route('/:courseId/projects/:projectId/evaluations') //gets all the 
         })
       })
   })
-  .post(function(req, res, next){ // adds an evaluation to a specfic project
-    evaluations.create(req.body, function(err, evaluation){
+  .post(function(req, res, next){ // add evaluations by making a cartesian product out of all the students in a team for a course
+    //step 1 Find the teams in the course
+    teams.find()
+    .where('course')
+    .in(req.params.courseId)
+    .exec(function(err,teams){
       if(err) throw err;
+      //perform for each team...
+      for(i = 0; i < teams.length; i++){
+        //make array of students in team
+        var students = teams[i].students
+        // Create cartesian product of students in each team
+        var createdEvals = [];
+        for(j = 0; j < students.length; j++){
+          for(k = 0; k < students.length; k++){
+            if(j != k){ //exclude students from evaluating themselves
+              req.body.evaluator = students[j];
+              req.body.evaluatee = students[k];
+              //create the evaluations
+              evaluations.create(req.body, function(err, evaluation){
+                if(err) throw err
+                projects.findById(req.params.projectId, function(err, project){
+                  if(err) throw error
+                  //find the project and push the new evaluation id to it
+                  console.log(createdEvals)
+                  project.evaluations.push(evaluation._id)
+                  project.save(function(err, project){
+                    if(err) throw err
+                  })
+                })
+                //var eval_id = evaluation._id
+                //createdEvals.push(evaluation._id)
+              })
+            }
+          }
+        }
 
-      var id = evaluation._id;
-      projects.findById(req.params.projectId, function(err, project){
-        if(err) throw err;
-        project.evaluations.push(id);
-        res.json(id);
-        // res.end('Added evaluation - id:' + id + " to project - id:" + req.params.projectId);
-        project.save(function(err, project){
-          if(err) throw err;
-          //res.writeHead(200, {'Content-Type':'text-plain'});
 
-        });
-      });
 
-    });
+      }
+      //after creating all of the evaluations, return projectId
+      res.json(req.params.projectId)
+    })
   });
 
 courseRouter.route('/:courseId/projects/:projectId/evaluations/:evaluationId') // gets a specific evaluation

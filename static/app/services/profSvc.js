@@ -103,6 +103,31 @@ app.factory("profSvc", ["authSvc", "$http", "$location", function(authSvc, $http
       })
     }
 
+    function getProjectInfo(courseId, projectId, token){
+      return $http.get('http://localhost:3000/courses/'+courseId+'/projects/'+projectId, {headers:{'access_token':token}}).then(function(res){
+        return res.data;
+      })
+    }
+
+    function getProjectEvaluations(courseId, projectId, token){
+      return $http.get('http://localhost:3000/courses/'+courseId+'/projects/'+projectId+'/evaluations', {headers:{'access_token':token}}).then(function(res){
+        return res.data;
+      })
+    }
+
+    function createEvaluations(body, courseId, projectId, token){
+      return $http({
+        method: "POST",
+        url: 'http://localhost:3000/courses/'+courseId+'/projects/'+projectId+'/evaluations',
+        data: {
+          name : body.name,
+          startDate: body.startDate,
+          endDate: body.endDate,
+        },
+        headers: {'access_token': token}
+      })
+    }
+
     return {
       getProfessorCourses: getProfessorCourses,
       getProfessorById: getProfessorById,
@@ -114,6 +139,9 @@ app.factory("profSvc", ["authSvc", "$http", "$location", function(authSvc, $http
       addStudentToCourse: addStudentToCourse,
       getCourseStudents: getCourseStudents,
       createTeam: createTeam,
-      getCourseTeams: getCourseTeams
+      getCourseTeams: getCourseTeams,
+      getProjectInfo: getProjectInfo,
+      getProjectEvaluations: getProjectEvaluations,
+      createEvaluations: createEvaluations
     }
 }]);

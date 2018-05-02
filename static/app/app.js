@@ -53,10 +53,18 @@ app.config(function($routeProvider){
     controller: "professorTeamFormCtrl",
     templateUrl: "app/partials/prof/p_team_form.html"
   })
-  // .when("professor/createCourse", {
-  //   controller: "createCourseCtrl",
-  //   templateUrl: "app/partials/prof/"
-  // })
+  .when("/professor/createCourse", {
+    controller: "createCourseCtrl",
+    templateUrl: "app/partials/prof/p_course_form.html"
+  })
+  .when("/professor/course/:courseId/project/:projectId", {
+    controller: "professorProjectCtrl",
+    templateUrl: "app/partials/prof/p_project.html"
+  })
+  .when("/professor/course/:courseId/project/:projectId/createEvaluation", {
+    controller: "professorEvaluationFormCtrl",
+    templateUrl: "app/partials/prof/p_evaluation_form.html"
+  })
   .when('/', {redirectTo: "/login"})
   //.otherwise({redirectTo: "/login"});
 
