@@ -222,7 +222,7 @@ courseRouter.route('/:courseId/projects/:projectId')
 courseRouter.route('/:courseId/projects/:projectId/evaluations') //gets all the evaluations in the specific project
   .get(function(req, res, next){
    //Finds the specific project by ID
-    pojects.findById(req.params.projectId, function(err, project){
+    projects.findById(req.params.projectId, function(err, project){
       if(err) throw err;
         //takes an array of values and searches the evaluations collection for objects that match those values for a specific attribute
        evaluations.find()

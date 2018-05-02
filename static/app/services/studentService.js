@@ -92,6 +92,38 @@ app.factory("studentService", ["$http", "$location", function($http, $location){
          });
     }
 
+    function getEvalStatuses(courseId, studentId, projectId, roster, token){
+        return $http.get('http://localhost:3000/courses/'+courseId+'/projects/'+projectId+'/evaluations', {headers: {'access_token': token }}).then(function(res){
+                 var evalStatuses = []
+
+          if(!res){
+             //error in code
+
+          }
+
+          else{
+            for(i=0; i<roster.length; i++){
+                //checks each evaluation in the project
+              for (var index in res.data){
+                  evaluation = res.data[index];
+                  //if the evaluation was created by the current student and is for the current teammate
+                  if(evaluation.evaluatee == roster[i]._id && evaluation.evaluator == studentId){
+                      //gives the current status
+                evalStatuses[i]=evaluation.status
+                      break;
+                  }
+                  
+                  else{
+                      //eval hasn't been started
+                    evalStatuses[i]= false
+                  }
+
+              }
+          }
+          }
+          return evalStatuses;
+         });
+    }
 
     function fillEvaluation(courseId, projectId, evaluator_id, evaluatee_id, f_feedback, f_collaboration, f_contribution, f_responsive, f_status, token){
          return $http({
@@ -154,7 +186,8 @@ app.factory("studentService", ["$http", "$location", function($http, $location){
         getTeamById: getTeamById,
         fillEvaluation: fillEvaluation,
         continueEvaluation: continueEvaluation,
-        viewEvaluations: viewEvaluations
+        viewEvaluations: viewEvaluations,
+        getEvalStatuses: getEvalStatuses
 
     }
 }]);

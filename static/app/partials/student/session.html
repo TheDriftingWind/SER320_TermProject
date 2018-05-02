@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Session</title>
+  <title>Evaluations</title>
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 </head>
@@ -45,49 +45,23 @@
         </thead>
 
         <tbody>
-          <tr>
-            <td>Charles</td>
-            <td>Zhu</td>
-            <td>10/1/2017</td>
-            <td>12/31/2017</td>
-            <td>Incomplete</td>
-            <td><a href="student_evaluation_form.html?studentId=Charles" class="btn btn-default">Evaluate</a></td>
+          <tr ng-repeat="student in roster">
+            <td>{{student.first_name}}</td>
+            <td>{{student.last_name}}</td>
+            <td>{{evalStatuses[$index]}}</td>
+            <td ng-if="evalStatuses[$index]==false"><a href="student_evaluation_form.html?studentId=Charles" class="btn btn-default">Evaluate</a></td>
           </tr>
-          <tr>
-            <td>Carly</td>
-            <td>Emile</td>
-            <td>10/1/2017</td>
-            <td>12/31/2017</td>
-            <td>Incomplete</td>
-            <td><a href="student_evaluation_form.html?studentId=Carly" class="btn btn-default">Evaluate</a></td>
-          </tr>
-          <tr>
-            <td>Larry</td>
-            <td>Fine</td>
-            <td>10/1/2017</td>
-            <td>12/31/2017</td>
-            <td>Incomplete</td>
-            <td><a href="student_evaluation_form.html?studentId=Larry" class="btn btn-default">Evaluate</a></td>
-          </tr>
-          <tr>
-            <td>Moe</td>
-            <td>Howard</td>
-            <td>10/1/2017</td>
-            <td>12/31/2017</td>
-            <td>Incomplete</td>
-            <td><a href="student_evaluation_form.html?studentId=Moe" class="btn btn-default">Evaluate</a></td>
-          </tr>
-          <tr>
-            <td>Curly</td>
-            <td>Howard</td>
-            <td>10/1/2017</td>
-            <td>12/31/2017</td>
-            <td>Incomplete</td>
-            <td><a href="student_evaluation_form.html?studentId=Curly" class="btn btn-default">Evaluate</a></td>
-          </tr>
+          
         </tbody>
       </table>
   </div>
+    <br>
+    <div>
+    <h3>Your Evaluations</h3>
+        <ol>
+        <li ng-repeat="evaluation in studentEvals"><a href="/viewevaluation">Evaluation {{$index}}</a></li>
+        </ol>
+    </div>
 
 </body>
 

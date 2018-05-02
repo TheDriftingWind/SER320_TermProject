@@ -23,6 +23,15 @@ app.config(function($routeProvider){
     controller: "studentProjectCtrl",
     templateUrl: "app/partials/student/project.html"
   })
+.when("/student/course/:courseId/project/:projectId/evaluations", {
+    controller: "studentEvaluationsCtrl",
+    templateUrl: "app/partials/student/session.html"
+  })
+
+.when("/student/course/:courseId/project/:projectId/evaluations/fillform/:evaluateeId", {
+    controller: "studentEvalFormCtrl",
+    templateUrl: "app/partials/student/student_evaluation_form.html"
+  })
   //Professor Routes
   .when("/professor", {
     controller: "professorHomeCtrl",
