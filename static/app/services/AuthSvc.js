@@ -45,7 +45,8 @@ app.factory("authSvc", ["$http", "$location", "$window", "$q", function($http, $
     return $http({
       method: 'POST',
       url: 'http://localhost:3000/api/logout',
-      headers: {'Content-Type':'application/json'} //TODO: access_token needs to be sent
+      //'access_token': $window.sessionStorage["userInfo"]
+      headers: {'Content-Type':'application/json', 'access_token': JSON.parse($window.sessionStorage['userInfo']).access_token}
     }).then(function(res){
       return res.data;
     })
