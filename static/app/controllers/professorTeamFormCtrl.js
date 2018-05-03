@@ -1,5 +1,5 @@
 app.controller("professorTeamFormCtrl", ["profSvc", "authSvc", "$scope", "$location", "$window", "$routeParams", function(profSvc, authSvc, $scope, $location, $window, $routeParams){
-
+  $scope.logout = logout
   $scope.submit = submit;
   $scope.data = [];
   // $scope.data.courseId = $routeParams.courseId;
@@ -29,6 +29,12 @@ app.controller("professorTeamFormCtrl", ["profSvc", "authSvc", "$scope", "$locat
     profSvc.createTeam($routeParams.courseId, $scope.data, $scope.userInfo.access_token).then(function(res){
       $location.path('/professor/course/'+$routeParams.courseId) //return to the course page
     })
+  }
+
+  function logout(){
+    authSvc.logout().then(function(res){
+      $location.path('/login')
+    });
   }
 
 }]);

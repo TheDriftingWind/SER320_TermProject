@@ -1,5 +1,6 @@
 app.controller("professorAddStudentCtrl", ["profSvc", "authSvc", "$scope", "$location", "$window", "$routeParams" , function(profSvc, authSvc, $scope, $location, $window, $routeParams){
   $scope.addStudentToCourse = addStudentToCourse
+  $scope.logout = logout;
   setup()
 
   function setup(){
@@ -29,6 +30,11 @@ app.controller("professorAddStudentCtrl", ["profSvc", "authSvc", "$scope", "$loc
     })
   }
 
+  function logout(){
+    authSvc.logout().then(function(res){
+      $location.path('/login')
+    });
+  }
 
 
 }]);

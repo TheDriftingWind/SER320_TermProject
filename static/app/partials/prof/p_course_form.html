@@ -1,19 +1,23 @@
+<div ng-include="'app/partials/prof/p_navbar.html'"></div>
 <div class="container center">
  <header>
    <h1>Course Form<span id="addUpdate"></span></h1>
  </header>
 </div>
 <div class="container boxed pb10 pt10 center">
-  <form>
+  <form name="myForm" novalidate ng-submit="createCourse()">
     <label>Course Name</label>
     <input type="text" class="form-control" name="name" id="name" ng-model="data.name"></input>
+    <div class="alert alert-danger" ng-show="myForm.name.$touched && data.name == '' ">Please fill out this field</div>
 
     <label>Course Number</label>
     <input type="text" class="form-control" name="number" id="number" ng-model="data.course_number"></input>
+    <div class="alert alert-danger" ng-show="myForm.number.$touched && data.course_number == '' ">Please fill out this field</div>
 
     <label>Term</label>
     <input type="text" class="form-control" name="term" id="term" ng-model="data.term"></input>
+    <div class="alert alert-danger" ng-show="myForm.term.$touched && data.term == '' ">Please fill out this field</div>
 
-    <button class="btn btn-primary mt10" ng-click="createCourse()">Submit</button>
+    <input type="submit" class="btn btn-primary mt10" ng-disabled="data.name == '' || data.course_number == '' || data.term == ''"/>
   </form>
 </div>

@@ -48,6 +48,7 @@ app.factory("authSvc", ["$http", "$location", "$window", "$q", function($http, $
       //'access_token': $window.sessionStorage["userInfo"]
       headers: {'Content-Type':'application/json', 'access_token': JSON.parse($window.sessionStorage['userInfo']).access_token}
     }).then(function(res){
+      $window.sessionStorage["userInfo"] = '';
       return res.data;
     })
   }

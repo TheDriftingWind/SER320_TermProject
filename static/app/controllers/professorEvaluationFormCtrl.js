@@ -5,6 +5,7 @@ $scope.data = [];
 $scope.data.name = '';
 $scope.data.startDate = '';
 $scope.data.endDate = '';
+$scope.logout = logout;
 
 function submit(){
   authSvc.getToken().then(function(res){
@@ -13,6 +14,12 @@ function submit(){
       $location.path("professor/course/"+$routeParams.courseId+"/project/"+$routeParams.projectId);
     });
   })
+}
+
+function logout(){
+  authSvc.logout().then(function(res){
+    $location.path('/login')
+  });
 }
 
 }]);

@@ -1,5 +1,7 @@
 app.controller("professorViewTeamCtrl", ["profSvc", "authSvc", "$scope", "$location", "$window", "$routeParams" , function(profSvc, authSvc, $scope, $location, $window, $routeParams){
 
+$scope.logout = logout;
+
 init()
 
 function init(){
@@ -12,6 +14,12 @@ function init(){
     })
 
   })
+}
+
+function logout(){
+  authSvc.logout().then(function(res){
+    $location.path('/login')
+  });
 }
 
 }]);

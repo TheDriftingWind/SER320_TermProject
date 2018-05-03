@@ -2,6 +2,7 @@ app.controller("professorProjectCtrl", ["profSvc", "authSvc", "$scope", "$locati
 
 $scope.courseId = $routeParams.courseId;
 $scope.projectId = $routeParams.projectId;
+$scope.logout = logout;
 
 init()
 
@@ -20,6 +21,12 @@ function init(){
     })
 
   })
+}
+
+function logout(){
+  authSvc.logout().then(function(res){
+    $location.path('/login')
+  });
 }
 
 }]);

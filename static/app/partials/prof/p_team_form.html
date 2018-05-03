@@ -1,3 +1,4 @@
+<div ng-include="'app/partials/prof/p_navbar.html'"></div>
   <div class="container">
    <header>
      <h1>Team Form</h1>
@@ -7,7 +8,8 @@
   <div class="container boxed pb10 pt10">
     <form class="form-inline">
       <label>Team Name</label>
-      <input type="text" class="form-control" name="team" id="teamName" ng-model="data.name" required></input>
+      <input type="text" class="form-control" name="team" id="teamName" ng-model="data.name"></input>
+      <div class="alert alert-danger" ng-show="data.name == '' ">*Name is required</div>
     </form>
   </div>
 
@@ -28,5 +30,5 @@
         </tr>
       </tbody>
     </table>
-    <button class="btn btn-primary" ng-click="submit()">Submit</button>
+    <button class="btn btn-primary" ng-click="submit()" ng-disabled="data.name == ''">Submit</button>
   </div>

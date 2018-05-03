@@ -1,22 +1,27 @@
+<div ng-include="'app/partials/prof/p_navbar.html'"></div>
 <div class="container center">
  <header>
    <h1>Project Form</h1>
  </header>
 </div>
 <div class="container boxed pb10 pt10 center">
-  <form>
+  <form name="myForm" ng-submit="submit()" novalidate>
     <label>Project Name</label>
     <input type="text" class="form-control" name="project" id="projectName" ng-model='data.name' required></input>
+    <div class="alert alert-danger" ng-show="myForm.project.$touched && data.name == '' ">Please fill this field</div>
 
-    <label>Description</label>
-    <textarea class="form-control" ng-model="data.description"></textarea
+    <label>Description</label> <!--not required-->
+    <textarea class="form-control" name="description" ng-model="data.description"></textarea>
 
     <label>Start Date</label>
-    <input type="date" class="form-control" name="project" id="startDate" ng-model='data.startDate' required></input>
+    <input type="date" class="form-control" name="startDate" id="startDate" ng-model='data.startDate' required></input>
+    <div class="alert alert-danger" ng-show="myForm.startDate.$touched && data.startDate == '' ">Please fill this field</div>
 
     <label>End Date</label>
-    <input type="date" class="form-control" name="project" id="endDate" ng-model='data.endDate' required></input>
-    <button class="btn btn-primary mt10" ng-click="submit()">Submit</button
+    <input type="date" class="form-control" name="endDate" id="endDate" ng-model='data.endDate' required></input>
+    <div class="alert alert-danger" ng-show="myForm.endDate.$touched && data.endDate == '' ">Please fill this field</div>
+
+    <input type="submit" class="btn btn-primary mt10" ng-disabled="data.name == '' || data.startDate == '' || data.endDate == ''"/>
 
   </form>
 </div>

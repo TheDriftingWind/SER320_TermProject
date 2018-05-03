@@ -4,6 +4,7 @@ app.controller("professorProjectFormCtrl", ["profSvc", "authSvc", "$scope", "$lo
   $scope.data.startDate = ''
   $scope.data.endDate = ''
   $scope.submit = submit;
+  $scope.logout = logout;
 
   init();
 
@@ -28,8 +29,10 @@ app.controller("professorProjectFormCtrl", ["profSvc", "authSvc", "$scope", "$lo
     })
   }
 
-  // $( function() {
-  //   $( "#startDate,#endDate" ).datepicker();
-  // } );
+  function logout(){
+    authSvc.logout().then(function(res){
+      $location.path('/login')
+    });
+  }
 
 }]);

@@ -1,6 +1,7 @@
 app.controller("professorHomeCtrl", ["profSvc", "authSvc", "$scope", "$location", "$window" , function(profSvc, authSvc, $scope, $location, $window){
 
 $scope.userInfo = [];
+$scope.logout = logout;
 
 function init(){ //run this function upon changing view
   authSvc.getToken().then(function(res){
@@ -15,5 +16,10 @@ function init(){ //run this function upon changing view
 }
 init() //setup the page
 
+function logout(){
+  authSvc.logout().then(function(res){
+    $location.path('/login')
+  });
+}
 
 }]);

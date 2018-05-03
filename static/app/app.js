@@ -82,3 +82,35 @@ app.config(function($routeProvider){
   //.otherwise({redirectTo: "/login"});
 
 })
+
+
+
+app.service('authInterceptor', function($q) { //intercept 401 Unauthorized responses.
+    var service = this;
+
+    service.responseError = function(response) { //if a 401 is intercepted, the user session is no longer allowed on the server
+        if (response.status == 401){
+            window.location = "#/login"; //redirect to login
+        }
+        return $q.reject(response);
+    };
+})
+.config(['$httpProvider', function($httpProvider) { //push the interceptor to the config
+    $httpProvider.interceptors.push('authInterceptor');
+}])
+
+app.run(["$rootScope", "$location", "$window", function ($rootScope, $location, $window) {
+
+    $rootScope.$on("$routeChangeSuccess", function (userInfo) {
+        console.log(userInfo);
+        if($window.sessionStorage['userInfo'] == ''){ //if the user is missing the token, redirect to login
+          $location.path("/login")
+        }
+    });
+
+    $rootScope.$on("$routeChangeError", function (event, current, previous, eventObj) {
+        if (eventObj.authenticated === false) {
+            $location.path("/login"); //on error to routeChange, return to login
+        }
+    });
+}]);

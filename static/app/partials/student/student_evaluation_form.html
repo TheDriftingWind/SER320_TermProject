@@ -32,15 +32,15 @@
    </div>
   <div class="container">
     <form name="evalForm" ng-submit="submit()" novalidate>
-      <div class="form-group" ng-class="{'has-error' : evalForm.feedback.$invalid && evalForm.feedback.$touched}">
+      <div class="form-group">
         <label>Feedback</label>
         <textarea name="feedback" ng-model="form.feedback" class="form-control" required></textarea>
-           <div class="alert alert-danger" ng-show="evalForm.feedback.$touched && evalForm.feedback.$invalid">Please enter your feedback</div>
+           <div class="alert alert-danger" ng-show="evalForm.feedback.$touched && form.feedback == ''">Please enter your feedback</div>
       </div>
 
       <div class="form-group" ng-class="{'has-error' : evalForm.collaboration.$touched && evalForm.collaboration == ''}">
         <label>(On a scale 1-Poor to 5-Excellent) How would you rate your team member's collaboration?</label>
-        <select name="collaboration" ng-model="form.collaboration" class="form-control" required>
+        <select name="collaboration" ng-model="form.collaboration" class="form-control">
           <option  ng-value="" value="" selected hidden disabled>--Select--</option>
           <option ng-value="1" value="1">1 - Poor</option>
           <option ng-value="2" value="2">2 - Marginal</option>
@@ -48,13 +48,13 @@
           <option ng-value="4" value="4">4 - Good</option>
           <option ng-value="5" value="5">5 - Excellent</option>
         </select>
-          <div class="alert alert-danger" ng-show="evalForm.collaboration.$touched && evalForm.collaboration == '' ">Please select a rating</div>
+          <div class="alert alert-danger" ng-show="evalForm.collaboration.$touched && form.collaboration == '' ">Please select a rating</div>
       </div>
-      
+
 
       <div class="form-group" ng-class="{'has-error' : evalForm.contribution.$touched && evalForm.contribution == ''}">
         <label>(On a scale 1-Poor to 5-Excellent) How would you rate your team member's contribution?</label>
-        <select ng-model="form.contribution" name="contribution" class="form-control" required>
+        <select ng-model="form.contribution" name="contribution" class="form-control">
           <option ng-value="" value="" selected hidden disabled>--Select--</option>
           <option ng-value="1" value="1">1 - Poor</option>
           <option ng-value="2" value="2">2 - Marginal</option>
@@ -62,13 +62,13 @@
           <option ng-value="4" value="4">4 - Good</option>
           <option ng-value="5" value="5">5 - Excellent</option>
         </select>
-          <div class="alert alert-danger" ng-show="evalForm.contribution.$touched && evalForm.collaboration == '' ">Please select a rating</div>
+          <div class="alert alert-danger" ng-show="evalForm.contribution.$touched && form.contribution == '' ">Please select a rating</div>
       </div>
-      
+
 
       <div class="form-group" ng-class="{'has-error' : evalForm.responsiveness.$touched && evalForm.responsiveness == ''}">
         <label>(On a scale 1-Poor to 5-Excellent) How would you rate your team member's responsiveness?</label>
-        <select ng-model="form.responsiveness" name="responsiveness" class="form-control" required>
+        <select ng-model="form.responsiveness" name="responsiveness" class="form-control">
           <option ng-value="" value="" selected hidden disabled>--Select--</option>
           <option ng-value="1" value="1">1 - Poor</option>
           <option ng-value="2" value="2">2 - Marginal</option>
@@ -76,7 +76,7 @@
           <option ng-value="4" value="4">4 - Good</option>
           <option ng-value="5" value="5">5 - Excellent</option>
         </select>
-           <div class="alert alert-danger" ng-show="evalForm.responsiveness.$touched && evalForm.responsiveness == '' ">Please select a rating</div>
+           <div class="alert alert-danger" ng-show="evalForm.responsiveness.$touched && form.responsiveness == '' ">Please select a rating</div>
       </div>
 
       <div class="form-group">

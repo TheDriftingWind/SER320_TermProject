@@ -94,10 +94,10 @@ app.post('/api/studentLogin', function(req, res, next){//authenticates the profe
 //	next()
 });
 
-app.post('/api/logout', function(res, req){
-	var token= request.headers.access_token;
+app.post('/api/logout', function(req, res){
+	var token = req.headers.access_token;
     removeFromTokens(token);
-    response.send(200);
+    res.send(200);
 });
 
 

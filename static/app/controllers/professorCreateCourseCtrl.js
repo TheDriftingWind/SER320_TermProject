@@ -5,6 +5,7 @@ app.controller("createCourseCtrl", ["profSvc", "authSvc", "$scope", "$location",
   $scope.data.name = '';
   $scope.data.course_number = '';
   $scope.data.term = '';
+  $scope.logout = logout;
 
   function createCourse(){
     authSvc.getToken().then(function(res){
@@ -12,6 +13,12 @@ app.controller("createCourseCtrl", ["profSvc", "authSvc", "$scope", "$location",
       profSvc.createNewCourse($scope.data, $scope.userInfo.id, $scope.userInfo.access_token).then(function(res){
         $location.path("/professor")
       })
+    });
+  }
+
+  function logout(){
+    authSvc.logout().then(function(res){
+      $location.path('/login')
     });
   }
 
