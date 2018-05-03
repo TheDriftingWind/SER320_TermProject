@@ -1,88 +1,24 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Team</title>
-    <link rel="stylesheet" type="text/css" href="../css/style.css" />
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
-    <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../js/functions.js"></script>
-
-</head>
-
-<body>
-  <nav class="navbar navbar-default" style="width: 100%; z-index: 9999;">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">PEWA</a>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="p_home.html">Home</a></li>
-          <li><a href="p_studentlookup.html">Search Student</a></li>
-          <li><a href="../index.html">Log Out</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <div class="container">
-    <header>
-      <h1>Team - <span id="team_name"></span></h1>
-      <script type="text/javascript">
-        var title = getUrlParameter('team');
-        console.log(title);
-        document.getElementById('team_name').innerHTML = title;
-      </script>
-    </header>
-  </div>
-
-  <div class="container boxed mt10">
-    <h4>Students</h4>
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Charles</td>
-          <td>Zhu</td>
-          <td><a href="p_session.html?student=Charles%20Zhu" class="btn btn-primary">View Evaluations</a></td>
-        </tr>
-        <tr>
-          <td>Carly</td>
-          <td>Emile</td>
-          <td><a href="p_session.html?student=Carly%20Emile" class="btn btn-primary">View Evaluations</a></td>
-        </tr>
-        <tr>
-          <td>Larry</td>
-          <td>Fine</td>
-          <td><a href="p_session.html?student=Larry%20Fine" class="btn btn-primary">View Evaluations</a></td>
-        </tr>
-        <tr>
-          <td>Moe</td>
-          <td>Howard</td>
-          <td><a href="p_session.html?student=Moe%20Howard" class="btn btn-primary">View Evaluations</a></td>
-        </tr>
-        <tr>
-          <td>Curly</td>
-          <td>Howard</td>
-          <td><a href="p_session.html?student=Curly%20Howard" class="btn btn-primary">View Evaluations</a></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-</body>
-
-</html>
+<div class="container">
+  <header>
+    <h1>Team - {{teams.teamName}}<span id="team_name"></span></h1>
+  </header>
+</div>
+<div class="container boxed mt10">
+  <h4>Students</h4>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="student in teams.students">
+        <td>{{student.first_name}}</td>
+        <td>{{student.last_name}}</td>
+        <td>{{student.email}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

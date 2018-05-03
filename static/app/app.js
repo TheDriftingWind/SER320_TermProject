@@ -56,6 +56,14 @@ app.config(function($routeProvider){
     controller: "professorEvaluationFormCtrl",
     templateUrl: "app/partials/prof/p_evaluation_form.html"
   })
+  .when("/professor/course/:courseId/team/:teamId", { //View specific team
+    controller: "professorViewTeamCtrl",
+    templateUrl: "app/partials/prof/p_team.html"
+  })
+  .when('/professor/course/:courseId/project/:projectId/evaluation/:evaluationId', {
+    controller: "professorViewEvaluationCtrl",
+    templateUrl: "app/partials/prof/p_evaluation_view.html"
+  })
   .when('/', {redirectTo: "/login"})
   //.otherwise({redirectTo: "/login"});
 

@@ -1,7 +1,7 @@
 app.controller("professorProjectCtrl", ["profSvc", "authSvc", "$scope", "$location", "$window", "$routeParams" , function(profSvc, authSvc, $scope, $location, $window, $routeParams){
 
 $scope.courseId = $routeParams.courseId;
-$scope.projectId = $routeParams.projectId
+$scope.projectId = $routeParams.projectId;
 
 init()
 

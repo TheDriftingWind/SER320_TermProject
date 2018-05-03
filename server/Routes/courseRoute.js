@@ -78,7 +78,7 @@ courseRouter.route('/:courseId/teams') //add new teams and get all teams
     });
   });
 
-  courseRouter.route('/:courseId/teams/:teamId')
+courseRouter.route('/:courseId/teams/:teamId')
   .get(function(req, res, next){
     teams.findById(req.params.teamId, function(err, team){
       if(err) throw err;
@@ -119,7 +119,7 @@ courseRouter.route('/:courseId/students')//get all the students registered for a
         })
     })
   })
-.post(function(req, res, next){ //only add students
+  .post(function(req, res, next){ //only add students
    courses.findById(req.params.courseId, function(err, course){
         if(err) throw err;
         course.students.push(req.body.studentId);
