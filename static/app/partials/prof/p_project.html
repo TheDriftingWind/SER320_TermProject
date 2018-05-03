@@ -7,6 +7,7 @@
 
   <div class="container boxed mt10 pb10">
     <h3>Actions</h3>
+    <a href="#/professor/course/{{courseId}}" class="btn btn-info"><span class="glyphicon glyphicon-arrow-left"></span> Back</a>
     <a href="#/professor/course/{{courseId}}/project/{{projectId}}/createEvaluation" class="btn btn-primary">Create New Evaluations</a>
   </div>
 
@@ -27,13 +28,14 @@
       <tbody>
         <tr ng-repeat="evaluation in evaluations">
           <td>{{evaluation.name}}</td>
-          <td>{{evaluation.evaluator}}</td>
-          <td>{{evaluation.evaluatee}}</td>
+          <td>{{getStudentName(evaluation.evaluator)}}</td>
+          <td>{{getStudentName(evaluation.evaluatee)}}</td>
           <td>{{evaluation.startDate}}</td>
           <td>{{evaluation.endDate}}</td>
-          <td>{{evaluation.status}}</td>
+          <td>{{evaluation.status == true ? 'Incomplete':'Complete'}}</td> <!--A true status means the evaluation was not submitted | false means it was submitted-->
           <td>
-            <a href="#/professor/course/{{courseId}}/project/{{projectId}}/evaluation/{{evaluation._id}}" class="btn btn-primary">View</a>
+            <a href="#/professor/course/{{courseId}}/project/{{projectId}}/evaluation/{{evaluation._id}}" class="btn btn-primary" ng-hide="evaluation.status">View</a>
+            <button class="btn btn-danger" ng-click="deleteEvaluation(evaluation._id)">Delete</button>
           </td>
         </tr>
       </tbody>

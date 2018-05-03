@@ -1,5 +1,8 @@
 app.controller("professorViewEvaluationCtrl", ["profSvc", "authSvc", "$scope", "$location", "$window", "$routeParams" , function(profSvc, authSvc, $scope, $location, $window, $routeParams){
 
+$scope.courseId = $routeParams.courseId;
+$scope.projectId = $routeParams.projectId;
+
 init()
 
 function init(){

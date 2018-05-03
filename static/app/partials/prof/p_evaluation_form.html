@@ -19,6 +19,6 @@
       <div class="alert alert-danger" ng-show="myForm.endDate.$touched && data.endDate == '' ">Please fill this field</div>
 
       <input type="submit" class="btn btn-primary mt10" ng-disabled="data.name == '' || data.startDate == '' || data.endDate == ''"/>
-
+      <a href="#/professor/course/{{courseId}}/project/{{projectId}}" class="btn btn-info pull-right mt10"><span class="glyphicon glyphicon-arrow-left"></span> Back</a>
     </form>
   </div>

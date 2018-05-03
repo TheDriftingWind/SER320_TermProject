@@ -140,6 +140,22 @@ app.factory("profSvc", ["authSvc", "$http", "$location", function(authSvc, $http
       })
     }
 
+    function deleteEvaluation(courseId, projectId, evaluationId, token){
+      return $http({
+        method: "DELETE",
+        url: 'http://localhost:3000/courses/'+courseId+'/projects/'+projectId+'/evaluations/'+evaluationId,
+        headers: {'access_token':token}
+      }).then(function(res){
+        return res.data;
+      })
+    }
+
+    // function getStudent(studentId, token){
+    //   return $http.get('http://localhost:3000/students/'+studentId, {headers:{'access_token':token}}).then(function(res){
+    //     return res.data;
+    //   })
+    // }
+
     return {
       getProfessorCourses: getProfessorCourses,
       getProfessorById: getProfessorById,
@@ -156,6 +172,7 @@ app.factory("profSvc", ["authSvc", "$http", "$location", function(authSvc, $http
       getProjectEvaluations: getProjectEvaluations,
       createEvaluations: createEvaluations,
       getTeam: getTeam,
-      getEvaluation: getEvaluation
+      getEvaluation: getEvaluation,
+      deleteEvaluation: deleteEvaluation
     }
 }]);

@@ -5,6 +5,7 @@ app.controller("professorProjectFormCtrl", ["profSvc", "authSvc", "$scope", "$lo
   $scope.data.endDate = ''
   $scope.submit = submit;
   $scope.logout = logout;
+  $scope.courseId = $routeParams.courseId;
 
   init();
 

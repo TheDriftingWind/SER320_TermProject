@@ -1,6 +1,7 @@
 app.controller("studentCourseCtrl", ["studentService", "authSvc", "$scope", "$location", "$window" , "$routeParams", function(studentService, authSvc, $scope, $location, $window, $routeParams){
 
 $scope.userInfo = [];
+$scope.courseId = $routeParams.courseId
 
 function init(){
 
@@ -26,7 +27,7 @@ studentService.getProjects($routeParams.courseId, $scope.userInfo.access_token).
   })
 
 }
-    
+
 $scope.logout = function(){
     authSvc.logout();
     $location.path("/");

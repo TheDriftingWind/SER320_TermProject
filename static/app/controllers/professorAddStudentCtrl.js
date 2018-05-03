@@ -1,6 +1,7 @@
 app.controller("professorAddStudentCtrl", ["profSvc", "authSvc", "$scope", "$location", "$window", "$routeParams" , function(profSvc, authSvc, $scope, $location, $window, $routeParams){
   $scope.addStudentToCourse = addStudentToCourse
   $scope.logout = logout;
+  $scope.courseId = $routeParams.courseId;
   setup()
 
   function setup(){

@@ -103,8 +103,9 @@ app.run(["$rootScope", "$location", "$window", function ($rootScope, $location, 
 
     $rootScope.$on("$routeChangeSuccess", function (userInfo) {
         console.log(userInfo);
-        if($window.sessionStorage['userInfo'] == ''){ //if the user is missing the token, redirect to login
+        if($window.sessionStorage['userInfo'] == '' && window.location.hash != '#/login' && window.location.hash != '#/register' ){ //if the user is missing the token, redirect to login
           $location.path("/login")
+          //console.log(window.location.hash != '#/register')
         }
     });
 

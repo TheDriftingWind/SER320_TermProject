@@ -1,6 +1,8 @@
 app.controller("studentEvaluationsCtrl", ["studentService", "authSvc", "$scope", "$location", "$window" , "$routeParams", function(studentService, authSvc, $scope, $location, $window, $routeParams){
-    
+
 $scope.userInfo = [];
+$scope.courseId = $routeParams.courseId;
+$scope.projectId = $routeParams.projectId;
 
 function init(){
 
@@ -33,21 +35,21 @@ studentService.getStudentTeam($routeParams.courseId, $scope.userInfo.id, $scope.
         studentService.getEvaluationsAsEvaluator($routeParams.courseId$, $scope.userInfo.id, $routeParams.projectId, $scope.roster, $scope.userInfo.access_token).then(function(evaluations){
         $scope.evalsAsEvaluator = evaluations;
         for(index in $scope.evalsAsEvaluator){
-           
+
             //get student object of evaluatee by id
  studentService.getStudentById($scope.evalsAsEvaluator[index].evaluatee).then(function(res){
-                if(!res){  
+                if(!res){
                 }
                 else{ $scope.evalsAsEvaluator[index].evaluateeInfo=res;
                 }
         })
-            
+
         }
         })
-        
+
         //gets evaluations that students have completed about them
          studentService.getEvaluationsAsEvaluatee($routeParams.courseId$, $scope.userInfo.id, $routeParams.projectId, $scope.roster, $scope.userInfo.access_token).then(function(evaluations){
-        $scope.evalsAsEvaluatee = evaluations; 
+        $scope.evalsAsEvaluatee = evaluations;
         })
     })
   }

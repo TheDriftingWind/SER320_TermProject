@@ -4,6 +4,7 @@ app.controller("professorTeamFormCtrl", ["profSvc", "authSvc", "$scope", "$locat
   $scope.data = [];
   // $scope.data.courseId = $routeParams.courseId;
   $scope.data.name = ''
+  $scope.courseId = $routeParams.courseId
   init() //setup the page
 
   function init(){ //run this function upon changing view

@@ -6,6 +6,8 @@ $scope.data.name = '';
 $scope.data.startDate = '';
 $scope.data.endDate = '';
 $scope.logout = logout;
+$scope.courseId = $routeParams.courseId;
+$scope.projectId = $routeParams.projectId;
 
 function submit(){
   authSvc.getToken().then(function(res){

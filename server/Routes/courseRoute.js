@@ -13,16 +13,12 @@ courseRouter.route('/')
     courses.find({}, function(err, courses){
       if(err) throw err;
       res.json(courses);
-      //res.end('done');
     });
   })
   .post(function(req, res, next) { //prof. make a new course (Req 5.2)
     courses.create(req.body, function(err, course){
         if(err)
             throw err;
-
-        //res.writeHead(200, {'Content/Type': 'text-plain'});
-        // res.end('Course '+course._id+' has been created');
         res.json(course);
         })
   });
@@ -42,7 +38,7 @@ courseRouter.route('/:courseId')
             throw err;
         res.json(course);
 
-        
+
     });
   })
   .delete(function(req, res, next){
@@ -51,20 +47,6 @@ courseRouter.route('/:courseId')
         res.json(resp);
     })
   });
-
-// courseRouter.route('/:courseId/projects')
-//   .get(functioN(req, res, next){
-//     courses.findById(req.param.courseId, function(err, course){
-//       if(err) throw err;
-//       projects.find({
-//         '_id': {$in: course.projects}
-//       }, function(err, projects){
-//         res.json(projects);
-//       })
-//     })
-//   })
-//
-//   courseRouter.route('/:course/')
 
 courseRouter.route('/:courseId/teams') //add new teams and get all teams
   .get(function(req, res, next){
@@ -265,15 +247,10 @@ courseRouter.route('/:courseId/projects/:projectId/evaluations') //gets all the 
                     if(err) throw err
                   })
                 })
-                //var eval_id = evaluation._id
-                //createdEvals.push(evaluation._id)
               })
             }
           }
         }
-
-
-
       }
       //after creating all of the evaluations, return projectId
       res.json(req.params.projectId)
@@ -299,9 +276,9 @@ courseRouter.route('/:courseId/projects/:projectId/evaluations/:evaluationId') /
     })
   })
   .delete(function(req, res, next){
-    evaluations.findByIdAndRemove(req.params.evaluationId, function(err, res){
+    evaluations.findByIdAndRemove(req.params.evaluationId, function(err, eval){
       if(err) throw err;
-      res.json(res);
+      res.json(eval);
     })
   });
 

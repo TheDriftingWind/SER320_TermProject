@@ -4,6 +4,7 @@
        <h1>Team Member Evaluation Form</h1>
        <h4>Start date - {{evaluation.startDate}}</h4>
        <h4>End date - {{evaluation.endDate}}</h4>
+         <a href="#/professor/course/{{courseId}}/project/{{projectId}}" class="btn btn-info pull-right"><span class="glyphicon glyphicon-arrow-left"></span> Back</a>
      </header>
    </div>
   <div class="container boxed center">
@@ -11,7 +12,7 @@
     <p>{{evaluation.feedback}}</p>
 
     <label>(On a scale 1-Poor to 5-Excellent) How would you rate your team member's collaboration</label>
-    <p>{{evlaution.collaboration}}</p>
+    <p>{{evaluation.collaboration}}</p>
     <label>(On a scale 1-Poor to 5-Excellent) How would you rate your team member's contribution</label>
     <p>{{evaluation.contribution}}</p>
     <label>(On a scale 1-Poor to 5-Excellent) How would you rate your team member's responsiveness</label>
