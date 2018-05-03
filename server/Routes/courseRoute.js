@@ -40,8 +40,9 @@ courseRouter.route('/:courseId')
     courses.findById(req.params.courseId, function(err, course){
         if(err)
             throw err;
-
         res.json(course);
+
+        
     });
   })
   .delete(function(req, res, next){

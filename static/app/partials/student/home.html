@@ -9,18 +9,19 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#/student">PEWA</a>
+        <a class="navbar-brand" href="#/student"><img style="height:38px; width:100px;" src="./images/PEWALogo.png"></a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="courselookup.html">Search Courses</a></li>
-          <li><a href="#/student">Log Out</a></li>
+        <!--  <li><a href="courselookup.html">Search Courses</a></li>-->
+            <li><a ng-click="logout()">Log Out</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
   <div class="container">
+      <h1>Student | Home</h1> 
       <h1>Welcome {{student.first_name}} {{student.last_name}}</h1>
 
       <hr />
@@ -41,10 +42,11 @@
               <tr ng-repeat="course in courses">
                 <td><a href="#/student/course/{{course._id}}">{{course.name}}</a></td>
                 <td>{{course.course_number}}</td>
-                <td>{{course.professor.last_name}}</td>
+                <td>{{course.professorInfo.last_name}}</td>
                 <td>{{course.term}}</td>
             </tbody>
           </table>
+          <!--
           <div class="dropdown">
             <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
               Add Course
@@ -55,6 +57,7 @@
               <li><a href="addCourseByID.html">Add by CourseID</a></li>
             </ul>
           </div>
+        -->
         </div>
 
     </div>
