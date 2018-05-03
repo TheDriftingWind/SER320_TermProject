@@ -5,27 +5,31 @@ $scope.userInfo = [];
 function init(){
 
   authSvc.getToken().then(function(res){
-    //console.log(JSON.parse(res))
     $scope.userInfo = JSON.parse(res);
-    //console.log($scope.userInfo.id)
-//console.log($routeParams.courseId);
 
+
+      //get logged in student info
 studentService.getStudentById($scope.userInfo.id).then(function(res){
       $scope.student = res;
-  //  console.log(res);
     })
 
+      //get selected course info
 studentService.getCourseById($routeParams.courseId, $scope.userInfo.access_token).then(function(res){
     $scope.course = res;
 });
 
+      //get projects within course
 studentService.getProjects($routeParams.courseId, $scope.userInfo.access_token).then(function(res){
     $scope.projects = res;
-    console.log(res);
 })
 
   })
 
+}
+    
+$scope.logout = function(){
+    authSvc.logout();
+    $location.path("/");
 }
 
 init()

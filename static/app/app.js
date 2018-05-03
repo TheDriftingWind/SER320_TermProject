@@ -28,10 +28,15 @@ app.config(function($routeProvider){
     templateUrl: "app/partials/student/session.html"
   })
 
-.when("/student/course/:courseId/project/:projectId/evaluations/fillform/:evaluateeId", {
+.when("/student/course/:courseId/project/:projectId/evaluations/fill/:evaluationId", {
     controller: "studentEvalFormCtrl",
     templateUrl: "app/partials/student/student_evaluation_form.html"
   })
+
+  .when("/student/course/:courseId/project/:projectId/evaluations/view/:index/:evaluationId", {
+      controller: "studentViewEvalCtrl",
+      templateUrl: "app/partials/student/s_evaluation_view.html"
+    })
   //Professor Routes
   .when("/professor", {
     controller: "professorHomeCtrl",

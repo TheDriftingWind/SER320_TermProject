@@ -1,11 +1,13 @@
 app.factory("studentService", ["$http", "$location", function($http, $location){
 
-
+    
     function getStudentById(studentId){
        return $http.get('http://localhost:3000/students/'+studentId).then(function(res){
          return res.data;
        });
     }
+    
+    //get courses that student is enrolled in
     function getStudentCourses(studentId, token){
         return $http.get('http://localhost:3000/courses/', {headers: {'access_token': token }} ).then(function(res){
               var studentCourses = [];
@@ -16,10 +18,13 @@ app.factory("studentService", ["$http", "$location", function($http, $location){
 
             else{
 
+                //check each course in system
                 for (var index in res.data){
                     course = res.data[index];
-                    var existingIndex = course.students.indexOf(studentId);
-
+                    
+                    var existingIndex = course.students.indexOf(studentId); 
+                    
+                    //if student exists in student array, student is enrolled in course
                     if(existingIndex>-1){
                         studentCourses.push(course);
                     }
@@ -49,6 +54,7 @@ app.factory("studentService", ["$http", "$location", function($http, $location){
          });
     }
 
+    //gets a collection of student objects by ids
     function getStudentGroup(studentIds){
         return $http({ //Post the new account
                 method: 'POST',
@@ -72,13 +78,14 @@ app.factory("studentService", ["$http", "$location", function($http, $location){
           }
 
           else{
+              //check each team existing in course
               for (var index in res.data){
                   team = res.data[index];
                   var existingIndex = team.students.indexOf(studentId);
-
+                  
+                  //if student exists in student array, student is in team
                   if(existingIndex>-1){
                       studentTeam=team;
-                      console.log(team);
                   }
 
               }
@@ -86,15 +93,17 @@ app.factory("studentService", ["$http", "$location", function($http, $location){
           return studentTeam;
       });
     }
+    
     function getTeamById(courseId, teamId, token){
          return $http.get('http://localhost:3000/courses/'+courseId+'/teams/'+teamId, {headers: {'access_token': token }}).then(function(res){
            return res.data;
          });
     }
-
-    function getEvalStatuses(courseId, studentId, projectId, roster, token){
+    
+    function getEvaluationsAsEvaluator(courseId, studentId, projectId, roster, token){
+        
         return $http.get('http://localhost:3000/courses/'+courseId+'/projects/'+projectId+'/evaluations', {headers: {'access_token': token }}).then(function(res){
-                 var evalStatuses = []
+                 var evaluations = []
 
           if(!res){
              //error in code
@@ -108,72 +117,69 @@ app.factory("studentService", ["$http", "$location", function($http, $location){
                   evaluation = res.data[index];
                   //if the evaluation was created by the current student and is for the current teammate
                   if(evaluation.evaluatee == roster[i]._id && evaluation.evaluator == studentId){
-                      //gives the current status
-                evalStatuses[i]=evaluation.status
-                      break;
+                      //returns all evals
+                evaluations.push(evaluation);
                   }
-                  
-                  else{
-                      //eval hasn't been started
-                    evalStatuses[i]= false
-                  }
-
+                
               }
           }
           }
-          return evalStatuses;
+          return evaluations;
          });
     }
+    
+     function getEvaluationsAsEvaluatee(courseId, studentId, projectId, roster, token){
+        
+        return $http.get('http://localhost:3000/courses/'+courseId+'/projects/'+projectId+'/evaluations', {headers: {'access_token': token }}).then(function(res){
+                 var evaluations = []
 
-    function fillEvaluation(courseId, projectId, evaluator_id, evaluatee_id, f_feedback, f_collaboration, f_contribution, f_responsive, f_status, token){
-         return $http({
-           method: 'POST',
-          url: 'http://localhost:3000/courses'+courseId+'/projects/'+projectId+'/evaluations',
-          data: { evaluatorId: evaluator_id,
-                   evaluateeId: evaluatee_id,
-                   feedback: f_feedback,
-                   collaboration: f_collaboration,
-                contribution: f_contribution,
-                 responsive: f_responsive,
-                 status: f_status
-                 },
-           headers: {'Content-Type':'application/json', 'access_token': token}
+          if(!res){
+             //error in code
+
+          }
+
+          else{
+            for(i=0; i<roster.length; i++){
+                //checks each evaluation in the project
+              for (var index in res.data){
+                  evaluation = res.data[index];
+                  //if the evaluation was created by the current teammate and is for the logged in student
+                  if(evaluation.evaluator == roster[i]._id && evaluation.evaluatee == studentId){
+                      //returns all evals
+                evaluations.push(evaluation);
+                  }
+                
+              }
+          }
+          }
+          return evaluations;
+         });
+    }
+    
+    function getEvaluationById(courseId, projectId, evaluationId, token){
+         return $http.get('http://localhost:3000/courses/'+courseId+'/projects/'+projectId+'/evaluations/'+evaluationId, {headers: {'access_token': token }}).then(function(res){
+                return res.data;
          })
-       }
 
-
-    function continueEvaluation(evaluationId, f_feedback, f_collaboration, f_contribution, f_responsive, f_status, token){
+    }
+    
+    //saves the data from the eval form filled by student, student may update evaluation multiple times until they hit submit
+    function continueEvaluation(courseId, projectId, evaluationId, token, f_feedback, f_collaboration, f_contribution, f_responsive, f_status){
          return $http({
            method: 'PUT',
           url: 'http://localhost:3000/courses/'+courseId+'/projects/'+projectId+'/evaluations/'+evaluationId,
           data: { feedback: f_feedback,
-                collaboration: f_collaboration,
-                contribution: f_contribution,
-                 responsive: f_responsive,
+                collaboration: parseInt(f_collaboration),
+                contribution: parseInt(f_contribution),
+                 responsive: parseInt(f_responsive),
                  status: f_status
                  },
            headers: {'Content-Type':'application/json', 'access_token': token}
-         })
+         }).then(function(res){
+                return res.data;
+              })
     }
 
-    function viewEvaluations(courseId, projectId, studentId, token){
-         $http.get('http://localhost:3000/courses/'+courseId+'/projects/'+projectId+'/evaluations', {headers: {'access_token': token }}).then(function(res){
-              var studentEvaluations = [];
-
-            if(!res){
-               //error in code
-            }
-
-            else{
-
-                    studentEvaluations = res.filter(function(evaluation){
-                        return evaluation.evaluatee == studentId;
-                    });
-                }
-
-            return studentEvaluations;
-        });
-    }
 
     return {
         getStudentById: getStudentById,
@@ -184,10 +190,10 @@ app.factory("studentService", ["$http", "$location", function($http, $location){
         getStudentTeam: getStudentTeam,
         getStudentGroup: getStudentGroup,
         getTeamById: getTeamById,
-        fillEvaluation: fillEvaluation,
-        continueEvaluation: continueEvaluation,
-        viewEvaluations: viewEvaluations,
-        getEvalStatuses: getEvalStatuses
+        getEvaluationById: getEvaluationById,
+        getEvaluationsAsEvaluator: getEvaluationsAsEvaluator,
+        getEvaluationsAsEvaluatee: getEvaluationsAsEvaluatee,
+        continueEvaluation: continueEvaluation
 
     }
 }]);
