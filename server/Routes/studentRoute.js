@@ -15,7 +15,6 @@ studentRouter.route('/')
     students.create(req.body, function(err, student){
          if(err)
             throw err;
-        // res.end('Student '+student._id+' has been registered');
         res.json(student)
     });
 

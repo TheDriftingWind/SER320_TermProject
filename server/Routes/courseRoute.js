@@ -165,11 +165,8 @@ courseRouter.route('/:courseId/projects')
         // Add the new projectId
         course.projects.push(id);
         res.json(id);
-        // res.end('Added project - id:' + id + " to course - id:" + req.params.courseId);
         course.save(function(err, course){
           if(err) throw err;
-          //res.writeHead(200, {'Content-Type':'text-plain'});
-
         });
       })
     })

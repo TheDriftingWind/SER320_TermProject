@@ -11,7 +11,7 @@ app.controller("createCourseCtrl", ["profSvc", "authSvc", "$scope", "$location",
     authSvc.getToken().then(function(res){
       $scope.userInfo = JSON.parse(res);
       profSvc.createNewCourse($scope.data, $scope.userInfo.id, $scope.userInfo.access_token).then(function(res){
-        $location.path("/professor")
+        $location.path("/professor") //path back to home after creation
       })
     });
   }

@@ -43,11 +43,4 @@ app.controller("RegisterCtrl", ["mainSvc", "$scope", "$location", "$window" , fu
     }
   }
 
-  // function validate(){
-  //   if(document.getElementById("email").value.includes("@quinnipiac.edu") == false){
-  //     alert("Invalid Email");
-  //   }
-  // }
-
-
 }]);

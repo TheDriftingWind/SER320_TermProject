@@ -23,9 +23,9 @@ app.controller("professorProjectFormCtrl", ["profSvc", "authSvc", "$scope", "$lo
   function submit(){
     profSvc.createProject($routeParams.courseId,$scope.data, $scope.userInfo.access_token).then(function(res){
       if(!res){
-        console.log('no record error')
+        console.log('no record error') //no record was created
       }else{
-        $location.path('/professor/course/'+$routeParams.courseId)
+        $location.path('/professor/course/'+$routeParams.courseId) //if project was created, path back to course page
       }
     })
   }

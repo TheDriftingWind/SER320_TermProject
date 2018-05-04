@@ -3,11 +3,11 @@ app.controller("professorViewTeamCtrl", ["profSvc", "authSvc", "$scope", "$locat
 $scope.logout = logout;
 $scope.courseId = $routeParams.courseId;
 
-init()
+init() //initialize information
 
 function init(){
-  authSvc.getToken().then(function(res){
-    $scope.userInfo = JSON.parse(res);
+  authSvc.getToken().then(function(res){ //get token
+    $scope.userInfo = JSON.parse(res); //use token in the service method call -- get team information
     profSvc.getTeam($routeParams.courseId, $routeParams.teamId, $scope.userInfo.access_token).then(function(res){
       $scope.teams = res;
     })

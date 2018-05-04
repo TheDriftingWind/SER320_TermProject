@@ -18,7 +18,6 @@ app.controller("professorTeamFormCtrl", ["profSvc", "authSvc", "$scope", "$locat
 
   function submit(){
     var checked = []; //make an array of the students that were checked
-    // console.log($scope.students)
     for(x = 0; x < $scope.students.length; x++){
       if($scope.students[x].checked){
         checked.push($scope.students[x]._id)
